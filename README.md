@@ -1,5 +1,7 @@
 # 🤖 Guia de Comandos - TuCaNo Store Bot
 
+# Para suporte contate: tucaca_1_40280 no discord
+
 Bem-vindo ao guia completo de comandos para o seu bot de loja! Este documento foi feito para ajudar os donos de servidor a configurar e gerenciar suas lojas de forma rápida e fácil.
 
 ## ➕ Adicione o Bot ao seu Servidor
