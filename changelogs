@@ -1,0 +1,15 @@
+**Changelog v1.1 (26/09/2025)**
+
+### ⚙️ Permissões
+
+* Corrigida falha: donos/admins agora podem cancelar pedidos pagos mesmo sendo o cliente do ticket.
+* Reestruturação completa da lógica de permissões → prioridade total para administradores.
+
+### 🐞 Bugs Corrigidos
+
+1. **Erro de inicialização (View não persistente)** → botões agora têm `custom_id`.
+2. **Erro NameError (SHOP_GROUP)** → corrigido nome de variável.
+3. **Erro na transcrição (`.get()` em sqlite3.Row)** → acesso corrigido para dicionário.
+4. **Condição de corrida (canal já deletado)** → transcrição agora usa mensagens do banco caso não consiga acessar histórico.
+
+✅ Resultado: Bot mais estável, seguro e permissões funcionando corretamente.
