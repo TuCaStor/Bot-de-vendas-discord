@@ -1,27 +1,53 @@
-Changelog v1.2 (28/09/2025)
+📌 Changelog Consolidado
+v1.1 (26/09/2025)
+🔒 Segurança
 
-🐞 Bugs Corrigidos
-
-Erro de “Interação Desconhecida” (Timeout 3s) → modal agora é aberto imediatamente, e só depois ocorre a operação no banco.
-
-/configurar pix → comando estável, imune a atrasos de latência.
-
-/configurar canais → também fortalecido, pois reutiliza a lógica aprimorada.
-
-✅ Resultado: Comandos com formulários (modais) estão muito mais robustos e confiáveis.
-
-Changelog v1.1 (26/09/2025)
+Sistema de auditoria anti-exclusão de tickets → identifica responsável, gera transcrição e envia alerta ao dono do bot.
 
 ⚙️ Permissões
 
-* Corrigida falha: donos/admins agora podem cancelar pedidos pagos mesmo sendo o cliente do ticket.
-* Reestruturação completa da lógica de permissões → prioridade total para administradores.
+Reestruturação completa de permissões → administradores têm prioridade total em qualquer ação.
 
 🐞 Bugs Corrigidos
 
-1. Erro de inicialização (View não persistente) → botões agora têm `custom_id`.
-2. Erro NameError (SHOP_GROUP) → corrigido nome de variável.
-3. Erro na transcrição (`.get()` em sqlite3.Row) → acesso corrigido para dicionário.
-4. Condição de corrida (canal já deletado) → transcrição agora usa mensagens do banco caso não consiga acessar histórico.
+Erro de inicialização (View não persistente) → botões agora têm custom_id.
+
+Erro NameError (SHOP_GROUP) → corrigido nome de variável.
+
+Erro na transcrição (.get() em sqlite3.Row) → acesso corrigido para dicionário.
+
+Condição de corrida (canal já deletado) → transcrição agora usa mensagens salvas no banco caso não consiga acessar histórico.
 
 ✅ Resultado: Bot mais estável, seguro e permissões funcionando corretamente.
+
+v1.2 (28/09/2025)
+🐞 Bugs Corrigidos
+
+Erro de “Interação Desconhecida” (Timeout 3s) → modal aberto imediatamente; banco só processa depois.
+
+/configurar pix → comando estável, imune a atrasos de latência.
+
+/configurar canais → também fortalecido pela lógica aprimorada de modais.
+
+✅ Resultado: Comandos com formulários (modais) estão muito mais robustos e confiáveis.
+
+v1.3 (28/09/2025)
+✨ Novas Funcionalidades
+
+Campo de entrega personalizável → novo comando /configurar campo_entrega permite definir qualquer pergunta (Riot ID, nick do Minecraft etc.).
+
+Fluxo de compra unificado pela sacola → compras diretas removidas; todas passam pela sacola (subtotal, cupons e PIX).
+
+🛡️ Segurança e Auditoria
+
+Alertas inteligentes (anti-autodenúncia) → o bot não gera alerta quando ele mesmo exclui tickets em operações normais.
+
+⚙️ Permissões
+
+Permissões nos botões de tickets refinadas → donos/admins sempre mantêm controle total, mesmo sendo clientes.
+
+🐞 Bugs Corrigidos
+
+AttributeError no módulo de logs → corrigido acesso de .get() para ['...'].
+
+✅ Resultado: Bot mais versátil para diferentes lojas, mais seguro contra fraudes e ainda mais estável.
