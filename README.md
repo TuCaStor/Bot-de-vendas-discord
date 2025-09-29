@@ -44,6 +44,15 @@ Para receber pagamentos, configure sua chave PIX. Ela será criptografada e arma
   - > **Nome do Beneficiário**: Seu nome completo, como aparece no PIX.
   - > **Cidade**: A cidade registrada na chave PIX (ex: SAO PAULO).
 
+### 4. Personalize o Campo de Entrega (Opcional, mas Recomendado!)
+
+Por padrão, o bot pede o "Nick do Roblox". Personalize essa pergunta para a sua loja!
+
+- **`/configurar campo_entrega`**
+  - > **`texto_do_campo`**: Defina a pergunta que será feita ao cliente.
+  - > **Exemplos:** "Qual seu Riot ID (Nome#Tag)?", "Qual seu nick no Minecraft?", "Qual seu @ no Instagram?".
+  - > Para voltar ao padrão, use `PADRAO`.
+
 ---
 
 ## 🛠️ Gerenciamento da Loja (Administradores e Gerentes)
