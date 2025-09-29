@@ -1,35 +1,21 @@
-📌 Changelog Consolidado
-v1.1 (26/09/2025)
-🔒 Segurança
+v1.4 (28/09/2025)
+⚙️ Correções de Lógica e Permissões
 
-Sistema de auditoria anti-exclusão de tickets → identifica responsável, gera transcrição e envia alerta ao dono do bot.
+Falha de permissão para donos de servidor em comandos de configuração
 
-⚙️ Permissões
+Problema: donos não conseguiam usar comandos como /configurar canais ou /verificacao postar_painel sem cargo de Administrador.
 
-Reestruturação completa de permissões → administradores têm prioridade total em qualquer ação.
+Causa: a função has_config_permission não checava se o usuário era o guild.owner.
 
-🐞 Bugs Corrigidos
+Solução: lógica reescrita → agora o bot:
 
-Erro de inicialização (View não persistente) → botões agora têm custom_id.
+Garante que está lidando com um discord.Member.
 
-Erro NameError (SHOP_GROUP) → corrigido nome de variável.
+Concede permissão imediata se o ID for igual ao guild.owner_id.
 
-Erro na transcrição (.get() em sqlite3.Row) → acesso corrigido para dicionário.
+Caso contrário, verifica se o usuário possui o cargo de Administrador.
 
-Condição de corrida (canal já deletado) → transcrição agora usa mensagens salvas no banco caso não consiga acessar histórico.
-
-✅ Resultado: Bot mais estável, seguro e permissões funcionando corretamente.
-
-v1.2 (28/09/2025)
-🐞 Bugs Corrigidos
-
-Erro de “Interação Desconhecida” (Timeout 3s) → modal aberto imediatamente; banco só processa depois.
-
-/configurar pix → comando estável, imune a atrasos de latência.
-
-/configurar canais → também fortalecido pela lógica aprimorada de modais.
-
-✅ Resultado: Comandos com formulários (modais) estão muito mais robustos e confiáveis.
+✅ Resultado: O dono do servidor é sempre reconhecido como autoridade máxima, podendo configurar o bot imediatamente após adicioná-lo. Sistema de permissões unificado e consistente com a hierarquia padrão do Discord.
 
 v1.3 (28/09/2025)
 ✨ Novas Funcionalidades
@@ -51,3 +37,35 @@ Permissões nos botões de tickets refinadas → donos/admins sempre mantêm con
 AttributeError no módulo de logs → corrigido acesso de .get() para ['...'].
 
 ✅ Resultado: Bot mais versátil para diferentes lojas, mais seguro contra fraudes e ainda mais estável.
+
+v1.2 (28/09/2025)
+🐞 Bugs Corrigidos
+
+Erro de “Interação Desconhecida” (Timeout 3s) → modal aberto imediatamente; banco só processa depois.
+
+/configurar pix → comando estável, imune a atrasos de latência.
+
+/configurar canais → também fortalecido pela lógica aprimorada de modais.
+
+✅ Resultado: Comandos com formulários (modais) estão muito mais robustos e confiáveis.
+
+v1.1 (26/09/2025)
+🔒 Segurança
+
+Sistema de auditoria anti-exclusão de tickets → identifica responsável, gera transcrição e envia alerta ao dono do bot.
+
+⚙️ Permissões
+
+Reestruturação completa de permissões → administradores têm prioridade total em qualquer ação.
+
+🐞 Bugs Corrigidos
+
+Erro de inicialização (View não persistente) → botões agora têm custom_id.
+
+Erro NameError (SHOP_GROUP) → corrigido nome de variável.
+
+Erro na transcrição (.get() em sqlite3.Row) → acesso corrigido para dicionário.
+
+Condição de corrida (canal já deletado) → transcrição agora usa mensagens salvas no banco caso não consiga acessar histórico.
+
+✅ Resultado: Bot mais estável, seguro e permissões funcionando corretamente.
