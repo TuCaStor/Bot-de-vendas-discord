@@ -1,12 +1,14 @@
 # 🤖 Guia de Comandos - TuCaNo Store Bot
 
-# Para suporte contate: tucaca_1_40280 no discord
+# Para suporte contate: tucaca_1_40280 no Discord
 
-Bem-vindo ao guia completo de comandos para o seu bot de loja! Este documento foi feito para ajudar os donos de servidor a configurar e gerenciar suas lojas de forma rápida e fácil.
+Bem-vindo ao guia completo de comandos para o seu bot de loja!  
+Este documento foi feito para ajudar os donos de servidor a configurar e gerenciar suas lojas de forma rápida e fácil.
+
+---
 
 ## ➕ Adicione o Bot ao seu Servidor
-
-Para começar, adicione o TuCaNo Store Bot ao seu servidor Discord clicando no link abaixo:
+Para começar, adicione o TuCaNo Store Bot ao seu servidor clicando no link abaixo:
 
 [**Clique aqui para convidar o Bot**](https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8&scope=bot)
 
@@ -14,124 +16,124 @@ Para começar, adicione o TuCaNo Store Bot ao seu servidor Discord clicando no l
 
 ## 🚀 Primeiros Passos e Configuração Essencial
 
-Após adicionar o bot, siga esta sequência para deixar sua loja 100% funcional.
-
 ### 1. Ative a Loja no seu Servidor
-
-Este é o primeiro e mais importante comando! Ele ativa o bot no seu servidor, colocando-o no plano de comissão padrão e vinculando a sua conta de dono para o faturamento.
+Este é o primeiro e mais importante comando! Ele ativa o bot no seu servidor, vinculando a sua conta de dono para o faturamento.
 
 - **`/loja vincular`**
 
 ### 2. Configure os Canais
-
-Defina onde cada ação do bot irá acontecer. Sem isso, os tickets e logs não funcionarão.
+Defina onde cada ação do bot irá acontecer.
 
 - **`/configurar canais`**
-  - > **`categoria_tickets`**: A categoria onde os carrinhos de compra serão criados.
-  - > **`categoria_suporte`**: A categoria para tickets de suporte geral.
-  - > **`canal_provas`**: Canal onde as provas de entrega são postadas.
-  - > **`canal_avaliacoes`**: Canal onde as avaliações dos clientes são exibidas.
-  - > **`canal_logs`**: **(MUITO IMPORTANTE)** Canal privado onde o bot enviará históricos de conversas e backups.
-  - > **`canal_comandos_sacola`**: *[Opcional]* Canal dedicado para os comandos `/sacola`.
+  - > **`categoria_tickets`**: Onde os carrinhos de compra serão criados.  
+  - > **`categoria_suporte`**: Para tickets de suporte geral.  
+  - > **`canal_provas`**: Canal onde as provas de entrega são postadas.  
+  - > **`canal_avaliacoes`**: Onde as avaliações dos clientes aparecem.  
+  - > **`canal_logs`**: **(MUITO IMPORTANTE)** Canal privado com históricos e backups.  
+  - > **`canal_comandos_sacola`**: *[Opcional]* Canal dedicado para `/sacola`.  
 
 ### 3. Configure o PIX
-
-Para receber pagamentos, configure sua chave PIX. Ela será criptografada e armazenada de forma segura.
+Para receber pagamentos:
 
 - **`/configurar pix`**
-  - Abre um formulário para você inserir seus dados de pagamento.
-  - > **Chave PIX**: Seu e-mail, telefone, CPF/CNPJ ou chave aleatória.
-  - > **Nome do Beneficiário**: Seu nome completo, como aparece no PIX.
-  - > **Cidade**: A cidade registrada na chave PIX (ex: SAO PAULO).
+  - > **Chave PIX**: e-mail, telefone, CPF/CNPJ ou chave aleatória.  
+  - > **Nome do Beneficiário**: Como aparece no PIX.  
+  - > **Cidade**: Cidade vinculada à chave PIX.  
 
-### 4. Personalize o Campo de Entrega (Opcional, mas Recomendado!)
-
-Por padrão, o bot pede o "Nick do Roblox". Personalize essa pergunta para a sua loja!
+### 4. Personalize o Campo de Entrega
+Por padrão, o bot pede "Nick do Roblox".  
+Personalize para qualquer jogo/serviço!
 
 - **`/configurar campo_entrega`**
-  - > **`texto_do_campo`**: Defina a pergunta que será feita ao cliente.
-  - > **Exemplos:** "Qual seu Riot ID (Nome#Tag)?", "Qual seu nick no Minecraft?", "Qual seu @ no Instagram?".
-  - > Para voltar ao padrão, use `PADRAO`.
+  - > **Exemplo:** "Qual seu Riot ID?", "Qual seu nick no Minecraft?", "Qual seu @ no Instagram?".  
+  - > Use `PADRAO` para voltar ao padrão.  
 
 ---
 
-## 🛠️ Gerenciamento da Loja (Administradores e Gerentes)
+## 🕹️ Comandos de Hub e Painéis Interativos
 
-Comandos para o dia a dia da sua loja.
+### 🎛️ Dashboard de Administração
+Painel fixo e persistente para gerenciar a loja.
 
-### 📦 Gerenciamento de Produtos (`/produto`)
+- **`/gerenciar_loja dashboard_fixo`**
+  - Posta um painel permanente em um canal privado.  
+  - Sobrevive a reinicializações do bot.  
+  - Botões levam a menus efêmeros (mantém o canal limpo).  
 
-- **`/produto adicionar`**: Adiciona um novo produto.
-- **`/produto editar`**: Edita um produto existente.
-- **`/produto excluir`**: Apaga um produto permanentemente.
-- **`/produto status`**: Ativa ou desativa um produto.
-- **`/produto listar`**: Mostra todos os produtos cadastrados.
-- **`/produto info`**: Exibe detalhes completos de um produto.
-- **`/produto limiar_estoque`**: Define um alerta para quando o estoque de um item estiver baixo.
+### 🧾 Hub do Cliente
+Um único comando para tudo que o cliente precisa.
 
-### 🖼️ Gerenciamento de Painéis (`/painel`)
+- **`/minha_loja`**
+  - 🛒 Ver Sacola  
+  - 📜 Histórico de compras  
+  - 💸 Gasto total + progresso para próxima recompensa  
+  - 🎟️ Cupons disponíveis  
 
-Painéis são as vitrines interativas onde os clientes escolhem os produtos.
+---
 
-- **`/painel criar`**: Cria um novo painel de vendas em um canal.
-- **`/painel editar`**: Edita o título, descrição, imagens ou cor de um painel.
-- **`/painel excluir`**: Apaga permanentemente um painel e sua mensagem.
-- **`/painel add_opcao`**: Adiciona um produto como opção em um painel.
-- **`/painel remover_opcao`**: Remove um produto de um painel.
-- **`/painel sync`**: Força a atualização de um painel para refletir as mudanças mais recentes.
+## 🛠️ Gerenciamento da Loja (Admins e Gerentes)
 
-### 🕹️ Gerenciamento Geral (`/gerenciar_loja`)
+### 📦 Produtos (`/produto`)
+- **`/produto adicionar`** → adiciona novo produto.  
+- **`/produto listar`** → exibe todos os produtos em menu suspenso com botões [✏️ Editar] e [🗑️ Excluir].  
+- **`/produto editar`** → edita produto existente.  
+- **`/produto excluir`** → remove produto.  
+- **`/produto status`** → ativa/desativa produto.  
+- **`/produto info`** → detalhes completos.  
+- **`/produto limiar_estoque`** → alerta de estoque baixo.  
 
-- **`/gerenciar_loja painel_controle`**: Abre um menu interativo para gerenciar produtos e painéis.
-- **`/gerenciar_loja estatisticas`**: Mostra um resumo de vendas, produtos mais vendidos e maiores clientes.
-- **`/gerenciar_loja relatorio`**: Exporta um relatório de vendas detalhado em formato `.csv`.
-- **`/gerenciar_loja diagnostico`**: Verifica se todas as configurações do bot no servidor estão corretas.
-- **`/gerenciar_loja backup`**: Gera um arquivo de backup de toda a sua loja e envia na sua DM.
-- **`/gerenciar_loja restaurar`**: **(CUIDADO)** Restaura a loja a partir de um arquivo de backup.
+### 🖼️ Painéis (`/painel`)
+- **`/painel criar`** → cria novo painel de vendas.  
+- **`/painel editar`** → edita título, descrição, imagens ou cor.  
+- **`/painel excluir`** → apaga painel.  
+- **`/painel add_opcao`** → adiciona produto ao painel.  
+- **`/painel remover_opcao`** → remove produto do painel.  
+- **`/painel sync`** → atualiza o painel.  
 
-### ⚙️ Configurações Adicionais (`/configurar`)
+### 🕹️ Administração Geral (`/gerenciar_loja`)
+- **`/gerenciar_loja painel_controle`** → painel interativo para produtos e painéis.  
+- **`/gerenciar_loja estatisticas`** → resumo de vendas e top clientes.  
+- **`/gerenciar_loja relatorio`** → exporta relatório `.csv`.  
+- **`/gerenciar_loja diagnostico`** → checa se a configuração está correta.  
+- **`/gerenciar_loja backup`** → gera backup da loja.  
+- **`/gerenciar_loja restaurar`** → restaura a loja de um backup.  
 
-- **`/configurar recompensa adicionar`**: Define um cargo que será dado automaticamente quando um cliente atingir um valor total de gastos.
-- **`/configurar recompensa listar`**: Lista todas as recompensas configuradas.
-- **`/configurar cargo_suporte adicionar`**: Permite que um cargo veja e responda a todos os tickets.
-- **`/configurar canal_ignorado adicionar`**: Faz com que mensagens em um canal não contem para sorteios.
+### ⚙️ Configurações Avançadas (`/configurar`)
+- **`/configurar recompensa adicionar`** → define cargo automático por gasto total.  
+- **`/configurar recompensa listar`** → lista recompensas.  
+- **`/configurar cargo_suporte adicionar`** → dá acesso a tickets.  
+- **`/configurar canal_ignorado adicionar`** → ignora mensagens de um canal para sorteios.  
 
-### 🎉 Gerenciamento de Sorteios (`/sorteio`)
+### 🎉 Sorteios (`/sorteio`)
+- **`/sorteio criar`** → inicia sorteio.  
+- **`/sorteio gerenciar`** → painel para rerolar, cancelar, finalizar.  
 
-- **`/sorteio criar`**: Inicia um novo sorteio.
-- **`/sorteio gerenciar`**: Abre um painel para finalizar, rerolar ou cancelar sorteios.
-
-### 🎟️ Gerenciamento de Cupons (`/cupom admin`)
-
-- **`/cupom admin_criar_tipo`**: Cria um cupom que pode ser resgatado por sorteio.
-- **`/cupom admin_criar_publico`**: Cria um código de desconto que qualquer um pode usar (ex: `BEMVINDO10`).
-- **`/cupom admin_listar`**: Lista todos os cupons e códigos criados.
-- **`/cupom admin_excluir`**: Apaga permanentemente um cupom ou código.
+### 🎟️ Cupons (`/cupom admin`)
+- **`/cupom admin_criar_tipo`** → cria cupom resgatável em sorteio.  
+- **`/cupom admin_criar_publico`** → cria código de desconto aberto.  
+- **`/cupom admin_listar`** → lista cupons criados.  
+- **`/cupom admin_excluir`** → apaga cupom.  
 
 ### ✅ Sistema de Verificação (`/verificacao`)
-
-- **`/configurar verificacao definir`**: Define o canal e o cargo para o sistema de verificação.
-- **`/verificacao postar_painel`**: Posta a mensagem com o botão "Verificar" no canal configurado.
+- **`/configurar verificacao definir`** → define canal/cargo para verificação.  
+- **`/verificacao postar_painel`** → posta painel de verificação.  
 
 ### 📢 Ações em Massa (`/revalidar`)
-
-- **`/revalidar remover_cargo`**: **(CUIDADO)** Remove um cargo de todos os membros do servidor.
-- **`/revalidar notificar_todos`**: **(CUIDADO)** Envia uma mensagem na DM de todos os membros do servidor.
+- **`/revalidar remover_cargo`** → remove cargo de todos.  
+- **`/revalidar notificar_todos`** → DM para todos os membros.  
 
 ---
 
-## 🙋 Comandos para Clientes e Usuários
+## 🙋 Comandos para Clientes
 
-Estes são os comandos que os membros do seu servidor usarão.
-
-- **Interagir com os Painéis**: A principal forma de compra é clicando nos menus dos painéis de venda.
-- **`/sacola ver`**: Mostra sua sacola de compras, permitindo remover itens, editar quantidades e aplicar cupons.
-- **`/minhascompras`**: Mostra seu histórico das últimas 10 compras.
-- **`/loja top`**: Exibe o ranking dos clientes que mais gastaram na loja.
-- **`/loja meugasto`**: Mostra seu gasto total e qual a próxima recompensa de cargo.
-- **`/loja plano`**: Verifica o plano atual da sua loja (Comissão ou Assinatura).
-- **`/loja mudardeplano`**: Permite comprar uma assinatura para a loja, mudando do plano de comissão.
-- **`/loja robux calcular_robux`**: Ajuda a calcular o preço de Robux com e sem a taxa de 30% do Roblox.
-- **`/cupom resgatar`**: Gasta mensagens para tentar a sorte e ganhar um cupom de desconto.
-- **`/cupom meuscupons`**: Lista todos os cupons que você possui.
-- **`/sorteio minhasmensagens`**: Verifica seu saldo de mensagens para usar em sorteios.
+- **Interagir com Painéis** → principal forma de compra.  
+- **`/sacola ver`** → mostra sacola, permite editar/remover/aplicar cupom.  
+- **`/minhascompras`** → últimas 10 compras.  
+- **`/loja top`** → ranking dos maiores clientes.  
+- **`/loja meugasto`** → gasto total + próxima recompensa.  
+- **`/loja plano`** → plano atual (comissão ou assinatura).  
+- **`/loja mudardeplano`** → troca plano para assinatura.  
+- **`/loja robux calcular_robux`** → calcula Robux com e sem taxa 30%.  
+- **`/cupom resgatar`** → tenta ganhar cupom de desconto.  
+- **`/cupom meuscupons`** → lista cupons do cliente.  
+- **`/sorteio minhasmensagens`** → saldo de mensagens para sorteios.  
