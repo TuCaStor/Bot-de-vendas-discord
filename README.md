@@ -64,10 +64,10 @@ Cria um menu permanente em um canal da Staff.
     *   `/produto limiar_estoque`: Bot avisa quando o estoque estiver baixo (ex: abaixo de 5).
 
 ### 🖼️ Painéis de Venda (`/painel`)
-*   **Criar/Postar:** `/painel criar` e `/painel sync`.
-    *   **Nota:** O comando `/painel sync` força a atualização visual (estoque, preços, emojis) na mensagem do canal.
-*   **Editar Aparência:** `/painel editar_opcao`
-    *   Use este comando para mudar o **Emoji** ou **Nome** de um item *apenas* dentro daquele painel específico, sem alterar o produto original.
+*   **Criar:** `/painel criar` - Cria o registro do painel no sistema.
+*   **Postar:** `/painel postar` - Envia (ou move) um painel já criado para um canal específico.
+*   **Sincronizar:** `/painel sync` - Força a atualização visual (estoque, preços) na mensagem já postada.
+*   **Editar Aparência:** `/painel editar_opcao` - Muda o **Emoji** ou **Nome** de um item *apenas* dentro daquele painel específico.
 
 ---
 
