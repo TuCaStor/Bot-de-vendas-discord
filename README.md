@@ -1,6 +1,6 @@
 # 🤖 Guia de Comandos - TuCaNo Store Bot
 
-## Para suporte contate: `moshiini_` no Discord ou entre nesse sv `https://discord.gg/rPFqpK2gqX`
+## Para suporte contate: `moshiini_` no Discord ou entre nesse sv https://discord.gg/rPFqpK2gqX
 
 Bem-vindo ao guia completo de comandos para o seu bot de loja!
 Este documento foi feito para ajudar os donos de servidor a configurar e gerenciar suas lojas de forma rápida e fácil.
