@@ -1,4 +1,4 @@
-# 🤖 Guia de Comandos - TuCaNo Store Bot
+# 🤖 Guia Oficial - TuCaNo Store Bot
 
 ## 📞 Suporte e Contato
 Para suporte, contate: **`moshiini_`** no Discord.
@@ -12,98 +12,91 @@ Ou entre no nosso servidor oficial: [https://discord.gg/rPFqpK2gqX](https://disc
 ---
 
 ## 🚀 Começando do Zero (Configuração Obrigatória)
-*Apenas o Dono do Servidor ou Admins podem fazer isso.*
+*Estes passos devem ser feitos pelo Dono do Servidor ou Administrador.*
 
 ### 1. Vincular a Loja
-O passo mais importante. Ativa o bot e define o sistema de faturamento.
+O passo mais importante. Ativa o bot no servidor.
 *   **Comando:** `/loja vincular`
-*   **O que faz:** Cria o registro da sua loja no banco de dados.
 
 ### 2. Configurar Canais
 Defina onde o bot vai trabalhar.
 *   **Comando:** `/configurar canais`
-*   **Parâmetros Importantes:**
-    *   `categoria_tickets`: Categoria onde os carrinhos de compra serão criados.
-    *   `canal_logs`: **(Essencial)** Canal privado onde ficam históricos de vendas e backups.
-    *   `canal_provas`: Onde as fotos de entrega são postadas.
-    *   `canal_logs_membros`: Para ver quem entra e sai (com análise de conta fake).
+*   **Exemplo:** `/configurar canais categoria_tickets:#Compras canal_logs:#logs-privado`
+*   **Detalhes:**
+    *   `categoria_tickets`: Onde os carrinhos de compra serão abertos.
+    *   `canal_logs`: **(Essencial)** Canal privado para histórico de vendas e backups.
+    *   `canal_provas`: Onde as fotos de entrega são enviadas.
+    *   `canal_logs_membros`: Monitora entrada/saída de membros (anti-fake).
 
-### 3. Configurar PIX
-Para receber o dinheiro das vendas.
+### 3. Configurar Pagamento (PIX)
 *   **Comando:** `/configurar pix`
 *   **O que faz:** Abre um formulário seguro para colocar sua Chave PIX, Nome e Cidade.
 
 ---
 
 ## 🎛️ Painel de Controle (O Jeito Fácil)
-**Esqueça a decoração de comandos!** Use o painel interativo para gerenciar tudo com cliques.
+**Recomendado!** Esqueça a decoração de comandos manuais. Use o painel interativo para gerenciar tudo com cliques.
 
-### 📌 Dashboard Fixo (Recomendado)
-Cria um painel permanente em um canal de staff.
+### 📌 Dashboard Fixo
+Cria um menu permanente em um canal da Staff.
 *   **Comando:** `/gerenciar_loja dashboard_fixo canal:#staff-loja`
-*   **O que permite fazer com cliques:**
-    *   📦 **Gerenciar Produtos:** Adicionar, Editar, Excluir, Mudar Preço/Estoque.
-    *   🖼️ **Gerenciar Painéis:** Criar menus de venda, adicionar opções aos menus, postar no canal.
-
-### 🕹️ Painel Temporário
-Se você não quer fixar uma mensagem, abra um menu só para você.
-*   **Comando:** `/gerenciar_loja painel_controle`
+*   **Funcionalidades:**
+    *   📦 **Gerenciar Produtos:** Adicionar, Editar Preço/Estoque, Excluir.
+    *   🖼️ **Gerenciar Painéis:** Criar menus de venda, adicionar itens ao menu, postar no canal.
 
 ---
 
-## 🛠️ Comandos Manuais de Loja (Alternativos)
-*Use estes comandos se preferir não usar o Painel Visual.*
+## 🛠️ Comandos Manuais de Loja (Avançado)
+*Use estes comandos para ajustes finos que o Painel de Controle ainda não cobre.*
 
-### 📦 Produtos
-*   `/produto adicionar` - Cadastra um novo item.
-    *   *Ex: `/produto adicionar nome_exibicao:Ouro tipo_produto:Moeda modelo_preco:Milhar valor_preco:10 estoque:-1`*
-    *   **💡 Truque de Suporte:** Se você criar um **Item Único** com **Preço 0** e **Estoque Infinito (-1)**, o bot não pedirá pagamento. Ao "comprar", ele abrirá automaticamente um **Ticket de Suporte**.
-*   `/produto editar` - Altera detalhes do produto.
-    *   **Nota:** É aqui que você altera a **Quantidade Mínima** de compra (use a opção `nova_quantidade_minima`).
-*   `/produto status` - Ativa/Desativa um produto (some do menu sem excluir).
-*   `/produto limiar_estoque` - Define quando o bot avisa que o estoque está baixo.
-*   `/produto excluir` - Apaga o produto permanentemente.
+### 📦 Produtos (`/produto`)
+*   **Criar Produto:** `/produto adicionar`
+    *   *Parâmetros:* Nome, Tipo (Item/Moeda), Preço, Estoque.
+    *   **💡 Dica Pro (Sistema de Suporte):** Se você criar um **Item Único** com **Preço 0** e **Estoque Infinito (-1)**, o bot entende que é um serviço. Ao "comprar", ele abrirá automaticamente um **Ticket de Suporte** em vez de cobrar pagamento.
+    *   **Novo:** Use o campo `emoji` para definir um ícone padrão (ex: 💎).
 
-### 🖼️ Painéis de Venda
-*   `/painel criar` - Cria a mensagem bonita com o menu.
-*   `/painel add_opcao` - Adiciona um produto dentro de um painel existente.
-*   `/painel remover_opcao` - Tira um produto do painel.
-*   `/painel sync` - **Importante:** Atualiza visualmente o painel (estoque, preços) se algo mudar.
+*   **Editar Produto:** `/produto editar`
+    *   Use para mudar Preço, Estoque ou Nome.
+    *   **Quantidade Mínima:** É aqui que você define a `nova_quantidade_minima` (ex: obrigar a comprar no mínimo 1000 moedas).
+
+*   **Outros:**
+    *   `/produto status`: Ativa/Desativa um produto (some do menu sem excluir).
+    *   `/produto limiar_estoque`: Bot avisa quando o estoque estiver baixo (ex: abaixo de 5).
+
+### 🖼️ Painéis de Venda (`/painel`)
+*   **Criar/Postar:** `/painel criar` e `/painel sync`.
+    *   **Nota:** O comando `/painel sync` força a atualização visual (estoque, preços, emojis) na mensagem do canal.
+*   **Editar Aparência:** `/painel editar_opcao`
+    *   Use este comando para mudar o **Emoji** ou **Nome** de um item *apenas* dentro daquele painel específico, sem alterar o produto original.
 
 ---
 
-## ⚙️ Configurações e Admin
+## ⚙️ Administração e Segurança
 
-### 📊 Relatórios e Backups
-*   `/gerenciar_loja estatisticas` - Vendas totais, lucro e top produtos.
-*   `/gerenciar_loja relatorio` - Baixa uma planilha Excel (CSV) com todas as vendas.
-*   `/gerenciar_loja backup` - Envia um arquivo de segurança com toda sua loja.
-*   `/gerenciar_loja restaurar` - Reconstrói a loja usando um arquivo de backup.
+### 📊 Dados e Backups
+*   `/gerenciar_loja estatisticas` - Vendas totais, lucro e itens mais vendidos.
+*   `/gerenciar_loja relatorio` - Baixa uma planilha Excel (CSV) completa.
+*   `/gerenciar_loja backup` - Envia um arquivo de segurança da sua loja na sua DM.
+*   `/gerenciar_loja restaurar` - Reconstrói a loja inteira usando o arquivo de backup.
 
-### 🏆 Recompensas e Cargos
-*   `/configurar recompensa adicionar` - Cliente ganha cargo X ao gastar valor Y.
-*   `/configurar cargo_suporte adicionar` - Define quem pode ver/responder tickets.
-
-### ✅ Verificação
+### ✅ Verificação e Segurança
 *   `/configurar verificacao definir` - Configura canal e cargo de verificação.
 *   `/verificacao postar_painel` - Envia o botão de "Verificar-se" no canal.
 
 ### 🚫 Canais Ignorados
-*   `/configurar canal_ignorado adicionar` - O bot não conta mensagens de sorteio nestes canais.
+*   `/configurar canal_ignorado adicionar` - O bot não conta mensagens de sorteio nestes canais (ex: flood).
 
 ---
 
-## 🎉 Sorteios e Cupons
+## 🤝 Engajamento (Sorteios e Cupons)
 
-### 🎁 Sorteios
-*   `/sorteio criar` - Inicia um sorteio avançado.
-    *   *Ex: `/sorteio criar duracao:24h premio:Nitro Vencedores:1`*
-*   `/sorteio gerenciar` - Painel para encerrar, rerrolar (sortear de novo) ou cancelar.
+### 🎉 Sorteios (`/sorteio`)
+*   `/sorteio criar` - Inicia um sorteio (tempo, ganhadores, requisitos de cargo/mensagens).
+*   `/sorteio gerenciar` - Painel para encerrar antes da hora, rerrolar (sortear de novo) ou cancelar.
 
-### 🎟️ Cupons
-*   `/cupom admin_criar_publico` - Cria código tipo "NATAL10".
-*   `/cupom admin_criar_tipo` - Cria cupom para ser ganho em sorteio/resgate.
-*   `/cupom admin_listar` - Vê todos os cupons ativos.
+### 🎟️ Cupons (`/cupom`)
+*   `/cupom admin_criar_publico` - Cria código tipo "NATAL10" (qualquer um usa).
+*   `/cupom admin_criar_tipo` - Cria cupom para ser ganho em sorteios (item de inventário).
 
 ---
 
@@ -111,8 +104,8 @@ Se você não quer fixar uma mensagem, abra um menu só para você.
 
 *   `/minha_loja` - **O Hub do Cliente.** Mostra histórico, gastos e cupons.
 *   `/sacola ver` - Mostra o carrinho de compras atual.
-*   `/cupom resgatar` - Troca mensagens por cupons de desconto.
-*   `/sugestao` - Envia uma sugestão para a administração.
+*   `/sugestao` - Envia uma sugestão diretamente para a administração (com delay de 24h).
+*   `/cupom resgatar` - Troca mensagens por chances de ganhar cupons.
 *   `/loja robux calcular_robux` - Calculadora de taxas do Roblox.
 
 ---
@@ -121,14 +114,14 @@ Se você não quer fixar uma mensagem, abra um menu só para você.
 *Comandos exclusivos do desenvolvedor/hoster do bot.*
 
 ### 📢 Ações em Massa
-*   `/revalidar notificar_todos` - Envia DM para **todos** do servidor.
+*   `/revalidar notificar_todos` - Envia DM para **todos** os membros do servidor (Cuidado!).
 *   `/revalidar remover_cargo` - Remove um cargo de **todos** os membros.
 
 ### 🛡️ Moderação de Sugestões
-*   `/sugestao_admin bloquear` - Impede um usuário de enviar sugestões.
+*   `/sugestao_admin bloquear` - Impede um usuário chato de enviar sugestões.
 *   `/sugestao_admin desbloquear` - Libera o usuário.
 
 ### 🔑 Licenças (Cobrança)
-*   `/botadmin gerar_cobranca_licenca` - Cria cobrança para servidor Premium.
+*   `/botadmin gerar_cobranca_licenca` - Gera PIX para servidor Premium.
 *   `/botadmin licenca definir` - Ativa licença manualmente.
-*   `/botadmin bloquear_loja` - Trava uma loja remotamente.
+*   `/botadmin bloquear_loja` - Trava uma loja remotamente por falta de pagamento.
