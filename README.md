@@ -57,7 +57,9 @@ Se você não quer fixar uma mensagem, abra um menu só para você.
 ### 📦 Produtos
 *   `/produto adicionar` - Cadastra um novo item.
     *   *Ex: `/produto adicionar nome_exibicao:Ouro tipo_produto:Moeda modelo_preco:Milhar valor_preco:10 estoque:-1`*
-*   `/produto editar` - Altera preço, nome ou estoque.
+    *   **💡 Truque de Suporte:** Se você criar um **Item Único** com **Preço 0** e **Estoque Infinito (-1)**, o bot não pedirá pagamento. Ao "comprar", ele abrirá automaticamente um **Ticket de Suporte**.
+*   `/produto editar` - Altera detalhes do produto.
+    *   **Nota:** É aqui que você altera a **Quantidade Mínima** de compra (use a opção `nova_quantidade_minima`).
 *   `/produto status` - Ativa/Desativa um produto (some do menu sem excluir).
 *   `/produto limiar_estoque` - Define quando o bot avisa que o estoque está baixo.
 *   `/produto excluir` - Apaga o produto permanentemente.
