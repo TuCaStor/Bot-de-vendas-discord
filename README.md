@@ -17,7 +17,7 @@ O sistema de suporte via DM é restrito exclusivamente para **Donos de Servidore
 
 *   **Como funciona:** Envie um "Oi" na DM (privado) do bot.
 *   **O que acontece:** Um ticket será aberto diretamente com a administração do bot.
-*   **Atenção:** Clientes comuns que tentarem enviar mensagem serão bloqueados automaticamente pelo sistema.
+*   **Nota:** Clientes comuns não têm acesso a este canal. Se tentarem contato, receberão um aviso automático instruindo a buscar ajuda diretamente no servidor da loja.
 
 ---
 
