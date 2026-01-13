@@ -11,12 +11,24 @@ Ou entre no nosso servidor oficial: [https://discord.gg/rPFqpK2gqX](https://disc
 
 ---
 
-## 🚀 Começando do Zero (Configuração Obrigatória)
-*Estes passos devem ser feitos pelo Dono do Servidor ou Administrador.*
+## 🆘 Suporte Técnico (Exclusivo para Lojistas)
+**Precisa de ajuda com o bot?**
+O sistema de suporte via DM é restrito exclusivamente para **Donos de Servidores** e **Donos de Lojas**.
 
-### 1. Vincular a Loja
-O passo mais importante. Ativa o bot no servidor.
+*   **Como funciona:** Envie um "Oi" na DM (privado) do bot.
+*   **O que acontece:** Um ticket será aberto diretamente com a administração do bot.
+*   **Atenção:** Clientes comuns que tentarem enviar mensagem serão bloqueados automaticamente pelo sistema.
+
+---
+
+## 🚀 Começando do Zero (Configuração Obrigatória)
+*Passos essenciais para o Dono do Servidor.*
+
+### 1. Vincular a Loja (Ativação)
+Ativa o bot e define o sistema financeiro.
 *   **Comando:** `/loja vincular`
+*   **🎁 Bônus:** As primeiras **24 horas** após vincular são **GRÁTIS** (0% de taxa) para você testar tudo!
+*   **Taxas (Pós-teste):** Comissão de **2%** sobre vendas OU Assinatura fixa de **R$ 0,50/dia**.
 
 ### 2. Configurar Canais
 Defina onde o bot vai trabalhar.
@@ -34,40 +46,39 @@ Defina onde o bot vai trabalhar.
 
 ---
 
-## 🎛️ Painel de Controle (O Jeito Fácil)
-**Recomendado!** Esqueça a decoração de comandos manuais. Use o painel interativo para gerenciar tudo com cliques.
+## 🎛️ Painel de Controle (Recomendado)
+**O jeito mais fácil de usar!** Esqueça a decoração de comandos. Gerencie tudo com cliques.
 
 ### 📌 Dashboard Fixo
 Cria um menu permanente em um canal da Staff.
 *   **Comando:** `/gerenciar_loja dashboard_fixo canal:#staff-loja`
-*   **Funcionalidades:**
-    *   📦 **Gerenciar Produtos:** Adicionar, Editar Preço/Estoque, Excluir.
-    *   🖼️ **Gerenciar Painéis:** Criar menus de venda, adicionar itens ao menu, postar no canal.
+*   **O que faz:**
+    *   📦 **Gerenciar Produtos:** Adicionar, Editar (Preço/Estoque), Excluir.
+    *   🖼️ **Gerenciar Painéis:** Criar menus, adicionar itens, postar no canal.
 
 ---
 
 ## 🛠️ Comandos Manuais de Loja (Avançado)
-*Use estes comandos para ajustes finos que o Painel de Controle ainda não cobre.*
+*Use estes comandos para ajustes finos e personalizações.*
 
 ### 📦 Produtos (`/produto`)
-*   **Criar Produto:** `/produto adicionar`
-    *   *Parâmetros:* Nome, Tipo (Item/Moeda), Preço, Estoque.
-    *   **💡 Dica Pro (Sistema de Suporte):** Se você criar um **Item Único** com **Preço 0** e **Estoque Infinito (-1)**, o bot entende que é um serviço. Ao "comprar", ele abrirá automaticamente um **Ticket de Suporte** em vez de cobrar pagamento.
-    *   **Novo:** Use o campo `emoji` para definir um ícone padrão (ex: 💎).
-
-*   **Editar Produto:** `/produto editar`
-    *   Use para mudar Preço, Estoque ou Nome.
-    *   **Quantidade Mínima:** É aqui que você define a `nova_quantidade_minima` (ex: obrigar a comprar no mínimo 1000 moedas).
-
+*   **Criar:** `/produto adicionar`
+    *   *Campos:* Nome, Tipo (Item/Moeda), Preço, Estoque, Emoji (ícone).
+    *   **💡 Truque de Suporte:** Se criar um **Item Único** com **Preço 0** e **Estoque Infinito (-1)**, o bot cria um botão de "Abrir Ticket" em vez de cobrar.
+*   **Editar:** `/produto editar`
+    *   Use para mudar Preço, Estoque, Nome ou Emoji.
+    *   **Qtd. Mínima:** Defina `nova_quantidade_minima` aqui (ex: cliente só pode comprar acima de 1000 un).
 *   **Outros:**
     *   `/produto status`: Ativa/Desativa um produto (some do menu sem excluir).
-    *   `/produto limiar_estoque`: Bot avisa quando o estoque estiver baixo (ex: abaixo de 5).
+    *   `/produto limiar_estoque`: Bot avisa quando o estoque estiver baixo.
 
 ### 🖼️ Painéis de Venda (`/painel`)
 *   **Criar:** `/painel criar` - Cria o registro do painel no sistema.
-*   **Postar:** `/painel postar` - Envia (ou move) um painel já criado para um canal específico.
+*   **Postar:** `/painel postar` - Envia um painel já criado para um canal específico.
 *   **Sincronizar:** `/painel sync` - Força a atualização visual (estoque, preços) na mensagem já postada.
-*   **Editar Aparência:** `/painel editar_opcao` - Muda o **Emoji** ou **Nome** de um item *apenas* dentro daquele painel específico.
+*   **Adicionar Opção:** `/painel add_opcao` - Coloca um produto dentro do menu.
+*   **Personalizar:** `/painel editar_opcao`
+    *   Permite mudar o **Emoji** ou **Nome** de um item *apenas* dentro daquele painel específico (sem alterar o produto original).
 
 ---
 
@@ -84,15 +95,15 @@ Cria um menu permanente em um canal da Staff.
 *   `/verificacao postar_painel` - Envia o botão de "Verificar-se" no canal.
 
 ### 🚫 Canais Ignorados
-*   `/configurar canal_ignorado adicionar` - O bot não conta mensagens de sorteio nestes canais (ex: flood).
+*   `/configurar canal_ignorado adicionar` - O bot não conta mensagens de sorteio nestes canais (anti-flood).
 
 ---
 
 ## 🤝 Engajamento (Sorteios e Cupons)
 
 ### 🎉 Sorteios (`/sorteio`)
-*   `/sorteio criar` - Inicia um sorteio (tempo, ganhadores, requisitos de cargo/mensagens).
-*   `/sorteio gerenciar` - Painel para encerrar antes da hora, rerrolar (sortear de novo) ou cancelar.
+*   `/sorteio criar` - Inicia um sorteio (tempo, ganhadores, requisitos).
+*   `/sorteio gerenciar` - Painel para encerrar antes, rerrolar ou cancelar.
 
 ### 🎟️ Cupons (`/cupom`)
 *   `/cupom admin_criar_publico` - Cria código tipo "NATAL10" (qualquer um usa).
@@ -104,7 +115,7 @@ Cria um menu permanente em um canal da Staff.
 
 *   `/minha_loja` - **O Hub do Cliente.** Mostra histórico, gastos e cupons.
 *   `/sacola ver` - Mostra o carrinho de compras atual.
-*   `/sugestao` - Envia uma sugestão diretamente para a administração (com delay de 24h).
+*   `/sugestao` - Envia uma sugestão para a administração (Delay de 24h).
 *   `/cupom resgatar` - Troca mensagens por chances de ganhar cupons.
 *   `/loja robux calcular_robux` - Calculadora de taxas do Roblox.
 
@@ -114,14 +125,18 @@ Cria um menu permanente em um canal da Staff.
 *Comandos exclusivos do desenvolvedor/hoster do bot.*
 
 ### 📢 Ações em Massa
-*   `/revalidar notificar_todos` - Envia DM para **todos** os membros do servidor (Cuidado!).
+*   `/botadmin avisar_geral` - Envia um aviso na DM de todos os donos de lojas/servidores.
+*   `/revalidar notificar_todos` - Envia DM para **todos** os membros do servidor atual.
 *   `/revalidar remover_cargo` - Remove um cargo de **todos** os membros.
 
-### 🛡️ Moderação de Sugestões
-*   `/sugestao_admin bloquear` - Impede um usuário chato de enviar sugestões.
-*   `/sugestao_admin desbloquear` - Libera o usuário.
+### 🛡️ Moderação Global
+*   **Suporte (Modmail):**
+    *   `/modmail_admin configurar`: Define onde os tickets da DM aparecem.
+    *   `/modmail_admin bloquear/desbloquear`: Bane usuários do suporte.
+*   **Sugestões:**
+    *   `/sugestao_admin bloquear/desbloquear`: Impede usuários de enviar sugestões.
 
-### 🔑 Licenças (Cobrança)
-*   `/botadmin gerar_cobranca_licenca` - Gera PIX para servidor Premium.
-*   `/botadmin licenca definir` - Ativa licença manualmente.
-*   `/botadmin bloquear_loja` - Trava uma loja remotamente por falta de pagamento.
+### 🔑 Licenças e Faturamento
+*   `/botadmin gerar_cobranca_licenca`: Gera cobrança para servidor Premium.
+*   `/botadmin licenca definir`: Ativa licença manualmente.
+*   `/botadmin bloquear_loja`: Trava uma loja remotamente.
