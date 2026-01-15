@@ -1,3 +1,6 @@
+v2.5 (15/01/2026)
+Corrigido um bug com itens com nomes espelhados, ainda tem chance de acontecer, mas to tentando corrigir
+
 v2.4 (12/01/2026)
 Adicionado suporte via dm, basta mandar mensagem no privado do bot para iniciar atendimento
 (chat restrito a donos de svs e de lojas)
