@@ -1,27 +1,50 @@
-14/04/2026
+### v3.0 (20/06/2026)
+
+**⚡ Estabilidade do Banco de Dados (SQLite WAL)**
+*   Ativação do modo WAL (Write-Ahead Logging) e timeout estendido para 30 segundos, mitigando erros de travamento ("database is locked") durante picos de escrita concorrente (como no contador de mensagens).
+*   Garantia de execução uniforme do comando `PRAGMA foreign_keys = ON` em todas as conexões criadas para assegurar a consistência dos dados nas exclusões em cascata.
+
+**🛒 Correções Críticas na Sacola e Carrinho**
+*   Corrigido o crash no fluxo de edição da sacola (aplicação de cupons e ajuste de quantidade), substituindo chamadas conflitantes de resposta de interação após adiamento por um fluxo resiliente com `is_done()`.
+*   Implementada proteção que bloqueia a finalização se a chave PIX não estiver configurada no banco, evitando que clientes preencham o formulário e fiquem com a tela travada.
+*   Adicionada segurança para interromper o fluxo com um aviso se a chave PIX do servidor estiver corrompida ou impossível de descriptografar.
+
+**🔧 Acesso Administrativo e Desbloqueio de UX**
+*   Removida a trava de bloqueio de loja das permissões de gerente. Agora, mesmo se a loja for suspensa por faturas vencidas, a equipe administrativa retém acesso total aos comandos de configuração, diagnóstico e faturamento para resolver o problema.
+
+**🛡️ Otimização do Modmail (Suporte Central) e CAPTCHA**
+*   Correção de falha que gerava tickets duplicados quando canais ativos de suporte não eram retornados pelo cache local do Discord, implementando busca de fallback na API (fetch_channel) como alternativa.
+*   Correção de erro HTTP 400 ao enviar mídias (imagens) sem texto associado nas mensagens de Modmail.
+*   Implementação de trava de concorrência que impede a abertura de múltiplos canais caso ocorra spam de mensagens na DM durante o processamento inicial.
+*   Corrigida falha no carregamento do Cog do Modmail que causava falha crítica de inicialização (`TypeError: unknown parameter given: usuario`) devido à incompatibilidade de nomes no decorator `@app_commands.describe`.
+*   Adaptabilidade aprimorada do CAPTCHA em sistemas operacionais Linux com fallback automático de fontes escaláveis do sistema e controle de densidade de ruído para evitar que fontes bitmap padrão fiquem ilegíveis.
+
+---
+
+### 14/04/2026
 Host voltou eu acho, ainda não morreu
 
-v2.5 (15/01/2026)
+### v2.5 (15/01/2026)
 Corrigido um bug com itens com nomes espelhados, ainda tem chance de acontecer, mas to tentando corrigir
 
-v2.4 (12/01/2026)
+### v2.4 (12/01/2026)
 Adicionado suporte via dm, basta mandar mensagem no privado do bot para iniciar atendimento
 (chat restrito a donos de svs e de lojas)
 
-v2.3 (12/01/2026)
+### v2.3 (12/01/2026)
 Adicionado um comando para enviar sugestões
 E outro para avisar vocês de futuros updates ou correção do bot
 
-v2.2 (11/01/2026)
+### v2.2 (11/01/2026)
 Adicionado estoque no próprio painel para facilitar a visibilidade do estoque
 Adicionado comando para sugestão de funções para o bot
 https://iili.io/fvISg1I.png
 
-v2.1 (11/01/2026)
+### v2.1 (11/01/2026)
 É... bot voltou a vida e link pra um discord caso precisem de ajuda .=.
 https://discord.gg/rPFqpK2gqX
 
-v2.0 (29/09/2025)
+### v2.0 (29/09/2025)
 
 ✨ Novas Funcionalidades para Clientes
 
@@ -44,7 +67,7 @@ Corrigidas mensagens de erro duplicadas → sistema de erros centralizado.
 
 ✅ Resultado: Experiência muito mais visual, intuitiva e profissional para clientes e administradores.
 
-v1.4 (28/09/2025)
+### v1.4 (28/09/2025)
 
 ⚙️ Correções de Lógica e Permissões
 
@@ -60,7 +83,7 @@ Caso contrário, verifica se tem cargo de Administrador.
 
 ✅ Resultado: Donos de servidores agora sempre reconhecidos como autoridade máxima. Sistema de permissões unificado e consistente com a hierarquia padrão do Discord.
 
-v1.3 (28/09/2025)
+### v1.3 (28/09/2025)
 
 ✨ Novas Funcionalidades
 
@@ -82,7 +105,7 @@ AttributeError no módulo de logs → corrigido acesso de .get() para [...].
 
 ✅ Resultado: Bot mais versátil para diferentes lojas, mais seguro contra fraudes e ainda mais estável.
 
-v1.2 (28/09/2025)
+### v1.2 (28/09/2025)
 
 🐞 Bugs Corrigidos
 
@@ -94,7 +117,7 @@ Erro de “Interação Desconhecida” (Timeout 3s) → modal aberto imediatamen
 
 ✅ Resultado: Comandos com formulários (modais) estão muito mais robustos e confiáveis.
 
-v1.1 (26/09/2025)
+### v1.1 (26/09/2025)
 
 🔒 Segurança
 
