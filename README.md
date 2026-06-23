@@ -69,11 +69,11 @@ Destinados a gerenciar o inventário e as configurações individuais de cada pr
         *   `quantidade_minima`: Quantidade mínima de compra permitida (opcional).
         *   `emoji`: Emoji padrão atrelado ao item no painel.
 *   **`/produto editar [produto] [novo_nome] [novo_valor_preco] [novo_estoque] [nova_quantidade_minima] [nova_descricao] [nova_url_imagem] [novo_emoji]`**
-    *   *Descrição*: Edita os campos de um produto existente. Escreva `REMOVER` nos campos opcionais se desejar limpá-los do banco de dados. Os painéis que contêm o produto são atualizados automaticamente na hora.
+    *   *Descrição*: Edita os campos de um produto existente. Escreva `REMOVER` nos campos opcionais se desejar limpá-los do banco de dados. Os painéis que contêm o produto são atualizados automaticamente na hora, incluindo o nome exibido (sincronizado com o nome atual do produto).
 *   **`/produto status [produto] [status]`**
     *   *Descrição*: Ativa ou desativa um produto. Produtos desativados não são exibidos nos painéis de venda e não podem ser adicionados ao carrinho.
 *   **`/produto limiar_estoque [produto] [limite]`**
-    *   *Descrição*: Define um alerta de estoque baixo. O bot enviará um aviso no canal de logs da loja quando o produto atingir um estoque igual ou menor que o definido.
+    *   *Descrição*: Define um alerta de estoque baixo. O bot enviará um aviso no canal de logs da loja quando o produto atingir um estoque igual ou menor que o definido. Os painéis são sincronizados automaticamente (atualiza o indicador 🟢/🟡/🔴).
 *   **`/produto info [produto]`**
     *   *Descrição*: Exibe uma ficha técnica detalhada sobre as configurações do produto selecionado.
 *   **`/produto listar`**
@@ -103,6 +103,8 @@ Responsáveis por estruturar as vitrines interativas (Embeds com menus dropdown)
 *   **`/painel excluir [id_painel]`**
     *   *Descrição*: Deleta o painel do banco de dados e remove a mensagem original associada a ele no Discord.
 
+> **Nota sobre sincronização de nome**: O painel e o menu dropdown **sempre** exibem o nome atual do produto (via JOIN com a tabela de produtos). Quando você edita o nome de um produto, todos os painéis que o contêm são atualizados automaticamente. O campo `label` customizado (diferente do nome) é preservado para uso em menus administrativos, mas o cliente sempre vê o nome atual do produto.
+
 ---
 
 ### 🎫 4. Comandos de Cupons e Descontos
@@ -113,7 +115,7 @@ Gerenciamento de cupons de inventário (obtidos por engajamento) e cupons públi
 *   **`/cupom meuscupons`**
     *   *Descrição*: Exibe uma lista com todos os cupons que o usuário possui no seu inventário pessoal e que ainda não foram utilizados.
 *   **`/cupom admin_criar_tipo [nome] [valor_desconto] [peso_raridade]`**
-    *   *Descrição*: Cria um novo tipo de cupom que poderá ser ganho pelos usuários no sorteio do comando `/cupom resgatar`. O `peso_raridade` define a chance do cupom ser sorteado (valores maiores representam cupons mais comuns).
+    *   *Descrição*: Cria um novo tipo de cupom que poderá ser ganho pelos usuários no sorteio do comando `/cupom resgatar`. O `peso_raridade` define a chance do cupom ser sorteado (valores maiores representam cupons mais comuns). O valor do desconto deve estar entre 1 e 100.
 *   **`/cupom admin_criar_publico [codigo] [valor_desconto] [usos_maximos]`**
     *   *Descrição*: Cria um código de desconto público (Ex: `PROMO10`) que qualquer cliente pode digitar manualmente na sacola para obter descontos. `usos_maximos` define o limite de resgates globais permitidos (-1 para infinito).
 *   **`/cupom admin_listar`**
@@ -158,7 +160,7 @@ Configurações de infraestrutura do bot no servidor.
 *   **`/configurar campo_entrega [texto_do_campo]`**
     *   *Descrição*: Personaliza a pergunta de identificação solicitada no formulário de finalização da compra. (Ex: "Qual seu Nick no Roblox?" ou "Informe seu Riot ID"). Digite `PADRAO` para redefinir.
 *   **`/configurar recompensa adicionar [cargo] [valor]`**
-    *   *Descrição*: Cria uma regra de cargo por gasto cumulativo. Quando o cliente acumular o valor total especificado em compras entregues, o cargo será atribuído a ele automaticamente.
+    *   *Descrição*: Cria uma regra de cargo por gasto cumulativo. Quando o cliente acumular o valor total especificado em compras entregues, o cargo será atribuído a ele automaticamente. O cargo não pode ser @everyone, cargos de bot ou integrações, e deve estar abaixo do cargo do bot na hierarquia.
 *   **`/configurar recompensa remover [valor]`**
     *   *Descrição*: Remove a regra de cargo associada ao valor de gasto selecionado.
 *   **`/configurar recompensa listar`**
@@ -186,7 +188,7 @@ Estatísticas, relatórios, backups e diagnósticos da saúde do bot.
 *   **`/gerenciar_loja painel_controle`**
     *   *Descrição*: Abre um painel interativo temporário (visível apenas para quem usou) contendo botões de atalho para todas as principais ações administrativas do bot.
 *   **`/gerenciar_loja dashboard_fixo [canal]`**
-    *   *Descrição*: Posta um painel de controle administrativo fixo em um canal privado de staff. Ele não expira e serve como atalho rápido de gerenciamento para a equipe de gerentes.
+    *   *Descrição*: Posta um painel de controle administrativo fixo em um canal privado de staff. Ele não expira e serve como atalho rápido de gerenciamento para a equipe de gerentes. O ID da mensagem é salvo no banco de dados, garantindo que o painel continue funcional após reinicializações do bot.
 *   **`/gerenciar_loja estatisticas`**
     *   *Descrição*: Exibe um sumário de desempenho com o faturamento total da loja, ticket médio, quantidade de vendas concluídas, produtos mais vendidos e maiores clientes em gastos acumulados.
 *   **`/gerenciar_loja relatorio [periodo] [data_inicio] [data_fim]`**
@@ -200,7 +202,25 @@ Estatísticas, relatórios, backups e diagnósticos da saúde do bot.
 
 ---
 
-### ⚖️ 8. Comandos Globais de Superusuário (Bot Owner)
+### 🧪 8. Comando de Autoteste (Exclusivo do Dono do Bot)
+Sistema de diagnóstico e testes funcionais interativos, disponível apenas para o dono do bot.
+
+*   **`/testar_bot`**
+    *   *Descrição*: Executa um autoteste completo do bot. Apenas o dono do bot (configurado via `ADMIN_ID` no `.env`) pode usar este comando.
+    *   *O que faz*:
+        1. **Testes automáticos (read-only)**: Verifica Ambiente (Python/discord.py), Intents, Conexão Gateway, Banco de Dados (versão e tabelas), Criptografia (round-trip), Configuração, Cogs carregados, Comandos sincronizados, Tasks em background, e Permissões do bot na guild.
+        2. **Cria ambiente de teste**: Cria uma categoria temporária `🧪 Teste do Bot` com um canal `#instruções`, um produto de teste, um painel de teste, e configura temporariamente a categoria de tickets e canal de logs (restaurando a configuração original ao limpar).
+        3. **Menu interativo de testes funcionais** com 5 botões:
+            *   **🛒 Testar Compra** — Verifica produto, painel, categoria de tickets, módulo PIX, tickets criados e histórico de compras. Orienta o dono a comprar pelo painel e testar confirmação/cancelamento.
+            *   **🎁 Testar Sorteio** — Cria um canal de sorteio e orienta o dono a criar um sorteio curto (1 min), participar e verificar o resultado.
+            *   **🎟️ Testar Cupom** — Cria um cupom público de teste (10% off) e orienta o dono a aplicar no carrinho e verificar o desconto.
+            *   **📧 Testar Modmail** — Verifica a configuração do modmail e orienta o dono a abrir um ticket via DM.
+            *   **🧹 Limpar Dados de Teste** — Remove tudo: produto, painel, cupom, categoria, canais e restaura a configuração original. O bot volta ao funcionamento normal.
+    *   *Segurança*: O bot **não altera seu próprio funcionamento** durante o teste. Apenas cria dados de teste em paralelo, que são removidos ao clicar em **🧹 Limpar**.
+
+---
+
+### ⚖️ 9. Comandos Globais de Superusuário (Bot Owner)
 Comandos restritos exclusivamente ao desenvolvedor e dono do bot (configurado na hospedagem). Tentativas de uso por outros usuários geram um alerta de segurança e logs de auditoria.
 
 *   **`/botadmin gerar_cobranca_licenca [usuario] [servidor_id] [dias] [valor]`**
@@ -226,13 +246,140 @@ Comandos restritos exclusivamente ao desenvolvedor e dono do bot (configurado na
 *   **`/modmail_admin desbloquear [usuario_id]`**
     *   *Descrição*: Remove o bloqueio de Modmail de um usuário.
 *   **`/sugestao [mensagem]`**
-    *   *Descrição*: Envia uma sugestão/feedback de melhoria de forma privada diretamente para a DM do dono do bot. Possui limite de uso de 24h por usuário.
+    *   *Descrição*: Envia uma sugestão/feedback de melhoria de forma privada diretamente para a DM do dono do bot. Possui limite de uso de 24h por usuário. Funciona tanto em servidores quanto em DM.
 
 ---
 
 ## 🔒 Funcionalidades de Destaque e Segurança
 
+### Auditoria e Integridade
 *   **Auditoria de Deleção de Canais**: Se um administrador mal-intencionado ou um invasor excluir manualmente um canal de ticket de compra diretamente pelo Discord (ignorando o botão "Concluir" do bot), o bot captura a exclusão via Logs de Auditoria, gera um **Transcript HTML completo** de todas as mensagens e mídias enviadas no ticket e o envia como anexo em um alerta de segurança privado para o dono do bot.
+*   **Auditoria com Filtro de Tempo**: Os logs de auditoria para detectar kicks/bans filtram apenas entradas dos últimos 5 minutos, evitando falsos positivos com entradas antigas.
+*   **Logs de Entrada/Saída de Membros**: Registra membros que entram e saem, com análise de suspeita para contas criadas recentemente (< 7 dias), incluindo badges do Discord e tempo de conta.
+
+### Segurança de Credenciais e Dados
 *   **Segurança de Credenciais**: Informações financeiras de chaves PIX de lojistas passam por criptografia bidirecional simétrica AES-128 via biblioteca **Cryptography (Fernet)** antes de tocarem no banco de dados SQLite, reduzindo riscos em caso de vazamento físico do arquivo `.db`.
-*   **Modmail Avançado**: O sistema de Modmail permite que donos de lojas abram tickets de suporte direto na DM do bot para falar com a equipe de suporte do bot. Mensagens, mídias e arquivos são retransmitidos nos dois sentidos, e o sistema bloqueia tentativas de uso por usuários comuns (clientes finais), mantendo a fila focada em lojistas.
+*   **Chave de Criptografia Obrigatória**: O bot **recusa iniciar** se a `ENCRYPTION_KEY` estiver ausente ou inválida no arquivo `.env`, evitando perda silenciosa de dados. Gere uma chave com `python -m crypto`.
+*   **Fail-Closed em Bloqueios**: Se o banco de dados estiver indisponível durante uma verificação de bloqueio (sugestões/modmail), o sistema trata o usuário como bloqueado (fail-closed), impedindo bypass durante indisponibilidades.
+
+### Controle de Acesso e Permissões
+*   **Verificação de Permissões em Botões Administrativos**: Todas as Views persistentes com botões administrativos (TicketActionsView, GiveawayAdminView, DashboardView, SupportActionsView, ConfirmProofSubmissionView) possuem `interaction_check` que verifica se o usuário é staff antes de permitir o clique. Clientes não podem auto-confirmar pagamentos, auto-finalizar pedidos ou encerrar sorteios alheios.
+*   **Cancelamento de Pedido pelo Cliente**: O cliente pode cancelar seus próprios pedidos apenas enquanto o status for `PENDING_PAYMENT`. Após o pagamento, apenas gerentes podem cancelar.
+*   **Proteção contra Auto-Confirmação**: Mesmo um gerente não pode confirmar o pagamento do seu próprio pedido (exceto o dono do bot), evitando fraudes.
+*   **Validação de Cargos**: Cargos `@everyone`, cargos de bot e integrações são rejeitados ao configurar recompensas e verificação. A hierarquia de cargos é verificada (o cargo do bot deve estar acima do cargo a ser gerenciado).
+
+### Integridade Financeira
+*   **Guards Atômicos de Estoque**: O decremento de estoque usa `UPDATE ... WHERE stock >= ?` (atômico no banco de dados), impedindo oversell mesmo sob concorrência. Se o estoque for insuficiente, a operação falha e retorna `False`.
+*   **Rollback de Estoque**: Se um pedido com múltiplos itens falhar ao decrementar o estoque do item N, os itens 1..N-1 já decrementados são restaurados automaticamente.
+*   **Guards Atômicos de Cupom**: Cupons de inventário (`use_user_coupon`) e cupons públicos (`increment_coupon_usage`) usam `UPDATE ... WHERE is_used = 0` e `WHERE uses_count < max_uses` respectivamente, impedindo uso duplo ou exceder o limite de usos mesmo sob concorrência.
+*   **Revalidação de Estoque no Checkout**: O estoque é revalidado no momento de finalizar o carrinho, antes de criar o ticket e o registro de compra, evitando que o cliente perca o cupom/carrinho para uma compra que não pode ser fulfilled.
+*   **Cancelamento Atômico**: Ao cancelar um pedido `PAID`, o status é marcado como `CANCELED` com `WHERE status = 'PAID'` antes de reverter o estoque, impedindo que dois gerentes cancelando simultaneamente revertam o estoque duas vezes.
+*   **Rejeição de Valores Negativos**: Preços negativos, estoque inválido (< -1) e descontos > 100% são rejeitados em todos os fluxos (slash command e modal).
+*   **Suporte a Carrinho Gratuito**: Produtos grátis (preço 0) ou carrinhos com cupom de 100% pulam a geração do PIX e mostram "Pedido Gratuito", permitindo fluxos de doação/suporte sem pagamento.
+
+### Modmail Avançado
+*   O sistema de Modmail permite que donos de lojas abram tickets de suporte direto na DM do bot para falar com a equipe de suporte do bot. Mensagens, mídias e arquivos são retransmitidos nos dois sentidos, e o sistema bloqueia tentativas de uso por usuários comuns (clientes finais), mantendo a fila focada em lojistas.
+*   **Autorização de Fechamento**: Apenas administradores (dono do bot ou membros com `manage_guild`) podem fechar tickets de modmail.
+*   **Verificação de Staff no Resposta**: Apenas staff pode responder tickets via canal (mensagens de não-staff no canal de ticket são ignoradas), evitando impersonação.
+*   **Limpeza de Estado**: O conjunto `waiting_for_reason` é limpo periodicamente (a cada 30 minutos) para evitar memory leak e prompts duplicados.
+
+### Backups e Recuperação
 *   **Backups Semanais Automáticos**: Todos os domingos às 03:00 UTC, o bot gera e posta um backup estruturado em formato `.json` no canal de Logs de cada servidor, garantindo a possibilidade de restauração de produtos e histórico em caso de acidentes.
+*   **Limite de Tamanho**: Backups que excedam 8 MB (limite do Discord) são pulados com aviso no log, evitando falhas silenciosas.
+*   **Transcript em Cancelamento**: Ao cancelar um pedido, o transcript HTML do ticket é gerado e enviado ao canal de logs **antes** da deleção do canal, garantindo que o histórico seja preservado.
+
+### Performance e Estabilidade
+*   **Write-Ahead Logging (WAL)**: O SQLite usa modo WAL (configurado uma vez na inicialização), reduzindo contenção de lock e melhorando performance sob carga.
+*   **Whitelists de Colunas**: Todas as funções de UPDATE dinâmico (`update_guild_config`, `edit_product`, `edit_panel`, `edit_panel_option`) validam os nomes das colunas contra uma whitelist, prevenindo injeção SQL latente.
+*   **Índice Único no Carrinho**: A tabela `shopping_cart_items` possui um índice único em `(user_id, guild_id, product_id)`, garantindo atomicidade no upsert e impedindo itens duplicados.
+*   **Tasks com Tratamento de Erros**: Todas as tasks de background (verificação de licenças, sorteios, faturamento, verificação, modmail) têm tratamento de exceções, evitando que morram silenciosamente.
+*   **Guard de Concorrência em Sorteios**: O encerramento de sorteios usa um guard `_ending_giveaways` para impedir finalização dupla do mesmo sorteio.
+*   **Dedução de Lembretes de Licença**: Os lembretes de expiração de licença (dias 0, 2, 6) são deduplicados por dia, evitando spam de DMs ao dono do servidor.
+
+### Geração de Transcripts Segura
+*   **Proteção SSRF**: A geração de transcripts valida o scheme da URL (apenas http/https), impõe timeout de 30 segundos e limite de 25 MB por recurso, prevenindo SSRF e DoS ao buscar imagens/arquivos para arquivamento.
+*   **Sessão Única**: A geração de transcripts usa uma única sessão `aiohttp` (em vez de duas), reduzindo overhead.
+*   **Limite de Mensagens**: O transcript é limitado a 5000 mensagens por canal, evitando OOM em canais muito grandes.
+
+---
+
+## 🗄️ Estrutura do Banco de Dados
+
+O bot usa **SQLite** com **Prisma-style migrations** (versionadas de v1 a v17). As principais tabelas são:
+
+| Tabela | Função |
+|---|---|
+| `guild_configs` | Configurações por servidor (canais, PIX criptografado, licença, comissão, dashboard fixo) |
+| `products` | Produtos cadastrados (nome, preço, estoque, emoji, etc.) |
+| `panels` | Painéis de venda (título, descrição, banner, cor) |
+| `panel_options` | Opções do menu dropdown de cada painel (vincula produto ↔ painel) |
+| `purchase_history` | Histórico de compras (status, valor, itens, cupom usado, motivo de cancelamento) |
+| `shopping_cart_items` | Carrinho de compras (com índice único anti-duplicata) |
+| `coupons` / `user_coupons` | Cupons públicos e cupons de inventário (com guards atômicos anti-uso-duplo) |
+| `giveaways` / `giveaway_participants` | Sorteios e participantes |
+| `permissions` | Permissões customizadas de gerente por servidor |
+| `license_invoices` / `commission_invoices` | Faturas de licença e comissão |
+| `user_message_counts` | Saldo de mensagens por usuário (para cupons e sorteios) |
+| `modmail_config` / `modmail_tickets` | Configuração e tickets do sistema de modmail |
+| `deleted_messages` | Auditoria de mensagens deletadas (com TTL recomendado) |
+| `role_rewards` | Regras de cargo por gasto cumulativo |
+| `support_roles` | Cargos autorizados a ver tickets |
+| `ignored_channels` | Canais ignorados na contagem de mensagens |
+
+---
+
+## 🔧 Configuração de Instalação (Self-Host)
+
+### Pré-requisitos
+- Python 3.10+
+- Discord bot token (https://discord.com/developers/applications)
+- Intents privilegiadas ativadas: **SERVER MEMBERS** e **MESSAGE CONTENT**
+
+### Passos
+1. Extraia o bot em uma pasta.
+2. Copie `.env.example` para `.env` e preencha:
+   ```
+   DISCORD_BOT_TOKEN=seu_token_aqui
+   ENCRYPTION_KEY=cole_uma_chave_fernet_aqui
+   # Opcionais (sobrescrevem os defaults de config.py):
+   # TARGET_GUILD_ID=1362936000287871168
+   # ADMIN_ID=1353082142376198174
+   # PIX_KEY=tucastoreltda@gmail.com
+   ```
+3. Gere a `ENCRYPTION_KEY` rodando:
+   ```bash
+   python -m crypto
+   ```
+   Copie a linha `ENCRYPTION_KEY=...` para o seu `.env`.
+4. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Inicie o bot:
+   ```bash
+   python bot.py
+   ```
+
+### Dependências (`requirements.txt`)
+- `discord.py` — Framework do Discord
+- `python-dotenv` — Carregamento de variáveis de ambiente
+- `cryptography` — Criptografia Fernet das chaves PIX
+- `pytz` — Fuso horário
+- `pixqrcodegen` — Geração de QR code PIX
+- `qrcode` — Geração de QR codes
+- `Pillow` — Geração de imagens CAPTCHA
+- `aiohttp` — Requisições HTTP assíncronas (transcripts, arquivamento)
+
+---
+
+## 📌 Notas Finais
+
+*   **Intents**: O bot requer as intents `members` e `message_content` (privilegiadas). Ative-as no Portal do Desenvolvedor do Discord.
+*   **Hierarquia de Cargos**: O cargo do bot deve estar acima de qualquer cargo que ele precise gerenciar (recompensas, verificação, etc.).
+*   **Permissões Recomendadas**: Administrador (ou pelo menos: Gerenciar Canais, Gerenciar Cargos, Expulsar, Ver Registro de Auditoria, Ler Histórico de Mensagens, Enviar Mensagens).
+*   **Backup Regular**: Além do backup automático semanal, use `/gerenciar_loja backup` antes de mudanças grandes.
+*   **Autoteste**: Use `/testar_bot` periodicamente para verificar a saúde do bot e testar fluxos completos sem afetar dados reais.
+
+---
+
+*Documentação gerada para TuCaNo Store v3. Última atualização: versão corrigida e auditada com comando `/testar_bot` interativo.*
