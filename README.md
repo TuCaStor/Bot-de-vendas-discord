@@ -328,50 +328,6 @@ O bot usa **SQLite** com **Prisma-style migrations** (versionadas de v1 a v17). 
 
 ---
 
-## 🔧 Configuração de Instalação (Self-Host)
-
-### Pré-requisitos
-- Python 3.10+
-- Discord bot token (https://discord.com/developers/applications)
-- Intents privilegiadas ativadas: **SERVER MEMBERS** e **MESSAGE CONTENT**
-
-### Passos
-1. Extraia o bot em uma pasta.
-2. Copie `.env.example` para `.env` e preencha:
-   ```
-   DISCORD_BOT_TOKEN=seu_token_aqui
-   ENCRYPTION_KEY=cole_uma_chave_fernet_aqui
-   # Opcionais (sobrescrevem os defaults de config.py):
-   # TARGET_GUILD_ID=1362936000287871168
-   # ADMIN_ID=1353082142376198174
-   # PIX_KEY=tucastoreltda@gmail.com
-   ```
-3. Gere a `ENCRYPTION_KEY` rodando:
-   ```bash
-   python -m crypto
-   ```
-   Copie a linha `ENCRYPTION_KEY=...` para o seu `.env`.
-4. Instale as dependências:
-   ```bash
-   pip install -r requirements.txt
-   ```
-5. Inicie o bot:
-   ```bash
-   python bot.py
-   ```
-
-### Dependências (`requirements.txt`)
-- `discord.py` — Framework do Discord
-- `python-dotenv` — Carregamento de variáveis de ambiente
-- `cryptography` — Criptografia Fernet das chaves PIX
-- `pytz` — Fuso horário
-- `pixqrcodegen` — Geração de QR code PIX
-- `qrcode` — Geração de QR codes
-- `Pillow` — Geração de imagens CAPTCHA
-- `aiohttp` — Requisições HTTP assíncronas (transcripts, arquivamento)
-
----
-
 ## 📌 Notas Finais
 
 *   **Intents**: O bot requer as intents `members` e `message_content` (privilegiadas). Ative-as no Portal do Desenvolvedor do Discord.
