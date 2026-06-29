@@ -4,7 +4,11 @@ Mudanças e correções do bot, explicadas de forma simples.
 
 ---
 
-## 🔧 v3.1 — Atualização de Segurança (26/06/2026)
+## 🔧 v3.3 — Atualização de Segurança (28/06/2026)
+
+Corrigido um problema com imagens salvas carregando só uma parte
+
+## 🔧 v3.2 — Atualização de Segurança (26/06/2026)
 
 Novos comandos /protecao nisso há uma gama de novos comandos para segurança
 
