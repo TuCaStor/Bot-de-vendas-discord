@@ -4,6 +4,10 @@ Mudanças e correções do bot, explicadas de forma simples.
 
 ---
 
+## 🔧 v3.4 — Atualização de Bug (29/06/2026)
+
+Corrigido um problema em que não mostra detalhes de um membro que saiu do servidor nas logs
+
 ## 🔧 v3.3 — Atualização de Bug (28/06/2026)
 
 Corrigido um problema com imagens salvas carregando só uma parte
