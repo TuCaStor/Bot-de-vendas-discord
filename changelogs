@@ -2,6 +2,8 @@
 
 Mudanças e correções do bot, explicadas de forma simples.
 
+Problema atual - Chave aleatória não é lida corretamente, estou fazendo um update para corrigir isso
+
 ---
 
 ## 🔧 v3.4 — Atualização de Bug (29/06/2026)
