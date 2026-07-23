@@ -2,6 +2,11 @@
 
 ---
 
+## 🔧 v3.6 — Atualização de Funcionalidades (21/07/2026)
+
+Adicionado status customizado ao bot, mostra informações uteis
+Caso um item for uma moeda, ele abre um modal para calcular o valor de reais para moeda ou moeda para reais
+
 ## 🔧 v3.5 — Atualização de Bug (21/07/2026)
 
 Corrigido problema com geração de pix
