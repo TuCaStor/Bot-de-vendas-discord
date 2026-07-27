@@ -1,421 +1,336 @@
-# 📝 Changelog — TuCaNo Store
+Changelog - TuCaNo Store
 
----
+v3.6 - Atualização de Funcionalidades (26/07/2026)
 
-## 🔧 v3.6 — Atualização de Funcionalidades (21/07/2026)
+Corrigido um bug raro que dessincronizava os painéis.
 
-Adicionado status customizado ao bot, mostra informações uteis
-Caso um item for uma moeda, ele abre um modal para calcular o valor de reais para moeda ou moeda para reais
+v3.6 - Atualização de Funcionalidades (21/07/2026)
 
-## 🔧 v3.5 — Atualização de Bug (21/07/2026)
+Adicionado status customizado ao bot, mostrando informações úteis. Caso um item
+seja uma moeda, o bot abre uma janela para calcular a conversão de reais para a
+moeda ou da moeda para reais.
 
-Corrigido problema com geração de pix
+v3.5 - Atualização de Correção de Bugs (21/07/2026)
 
-## Bot ativo novamente, host tá meio vivo meio morta
+Corrigido um problema na geração do Pix. O bot está ativo novamente. A
+hospedagem continua um pouco instável.
 
-## 🔧 v3.4 — Atualização de Bug (29/06/2026)
+v3.4 - Atualização de Correção de Bugs (29/06/2026)
 
-Corrigido um problema em que não mostra detalhes de um membro que saiu do servidor nas logs
+Corrigido um problema em que os detalhes de um membro que saiu do servidor não
+apareciam nos logs.
 
-## 🔧 v3.3 — Atualização de Bug (28/06/2026)
+v3.3 - Atualização de Correção de Bugs (28/06/2026)
 
-Corrigido um problema com imagens salvas carregando só uma parte
+Corrigido um problema em que as imagens salvas carregavam apenas em parte.
 
-## 🔧 v3.2 — Atualização de Segurança (26/06/2026)
+v3.2 - Atualização de Segurança (26/06/2026)
 
-Novos comandos /protecao nisso há uma gama de novos comandos para segurança
+Novos comandos /protecao. Com isso, foi adicionado um pacote de novos comandos
+voltados para a segurança.
 
-## 🔧 v3.1 — Atualização de Correções e Segurança (23/06/2026)
+v3.1 - Atualização de Correções e Segurança (23/06/2026)
 
-Esta é uma atualização **gigante de correções**. O bot passou por uma auditoria completa e dezenas de bugs foram corrigidos. Abaixo, explicado de forma simples:
+Esta é uma grande atualização de correções. O bot passou por uma auditoria
+completa e dezenas de bugs foram corrigidos. Veja os detalhes:
 
----
+Compras e Pagamentos:
+
+  - O nome do produto agora atualiza no painel automaticamente. Antes, ao
+    alterar o nome de um produto, o painel continuava mostrando o nome antigo.
+    Agora todos os painéis atualizam na hora, sem precisar recriar nada.
+  - O estoque não fica mais negativo. Se duas pessoas comprassem o último item
+    ao mesmo tempo, o estoque podia ficar negativo. Agora o bot trava a venda se
+    o estoque acabar.
+  - O bot devolve o estoque se a compra falhar durante o processo. Se o carrinho
+    tinha 3 itens e o bot retirou os dois primeiros do estoque, mas o terceiro
+    estava esgotado, os dois primeiros ficavam perdidos. Agora o bot devolve os
+    itens ao estoque e avisa o cliente.
+  - Um mesmo cupom não pode mais ser usado duas vezes na mesma compra. Clicar
+    rapidamente em finalizar compra não permite mais reaplicar o cupom.
+  - Cupons públicos não ultrapassam o limite de uso. Se o cupom tinha limite
+    para 10 usos, o sistema trava exatamente ao atingir o limite, mesmo com
+    cliques simultâneos.
+  - Carrinho gratuito (R$ 0,00) funciona normalmente. Se o valor zerar por cupom
+    de 100% ou produto grátis, o bot pula a etapa do Pix e confirma o pedido
+    gratuito.
+  - Revalidação do estoque antes de finalizar. O bot checa a quantidade
+    disponível na hora que o cliente fecha o pedido, antes de criar o ticket,
+    evitando transtornos após o pagamento.
+  - O nome do produto no menu de seleção também atualiza para a versão mais
+    recente.
+
+Cancelamento de Pedidos:
+
+  - Dois administradores cancelando um pedido ao mesmo tempo não duplicam mais a
+    devolução de estoque.
+  - A transcrição em HTML da conversa é gerada e enviada para o canal de logs
+    antes de apagar o ticket de cancelamento.
+
+Cupons:
+
+  - Bloqueado o cadastro de cupons com desconto maior que 100%.
+  - Bloqueado o cadastro de cupons com quantidade máxima de usos negativa. O
+    sistema aceita números positivos ou -1 para usos infinitos.
+  - O resgate de cupons por mensagens exige e desconta o saldo correto de
+    mensagens por tentativa.
+
+Sorteios:
+
+  - Sorteios não finalizam mais duas vezes nem declaram vencedores duplicados.
+  - Se a cobrança de mensagens para entrar em um sorteio pago falhar, o usuário
+    não recebe a entrada gratuita.
+  - Erros de digitação ao configurar cargos necessários para o sorteio não
+    travam mais a criação do evento.
+
+Modmail (Atendimento):
+
+  - O botão de fechar ticket no suporte agora é exclusivo para administradores.
+  - Apenas membros da equipe conseguem responder pelas mensagens no canal do
+    ticket.
+  - O bot limpa da memória os atendimentos não concluídos via mensagem direta a
+    cada 30 minutos.
+
+Permissões e Segurança dos Botões:
+
+  - O cliente não pode mais clicar no botão de confirmar pagamento no próprio
+    ticket. Ação restrita à equipe.
+  - O cliente não pode mais clicar no botão de finalizar entrega. Ação restrita
+    à equipe.
+  - Botões de gerenciamento de sorteio (finalizar, recriar, cancelar) estão
+    restritos ao criador do sorteio ou administradores.
+  - Painel fixo de gerenciamento da loja protegido contra cliques de membros sem
+    permissão.
+  - Botões de encerramento de tickets de suporte restritos à equipe.
+
+Painel Fixo de Controle:
+
+  - O painel fixo de controle salva seus dados corretamente e volta a funcionar
+    mesmo após o bot reiniciar.
+  - O bot recarrega e reativa os painéis fixos automaticamente assim que fica
+    online.
+
+Licenças e Faturamento:
+
+  - Os botões de gerenciamento de licença recebidos nas mensagens diretas só
+    aceitam comandos do dono do bot.
+  - Aprovar uma licença nova não zera mais o saldo pendente de comissões.
+  - Os lembretes de licença a vencer enviam apenas uma notificação por dia para
+    o dono do servidor.
+
+Logs e Auditoria:
+
+  - Registros de entrada e saída de membros ajustados para não falhar caso
+    faltem informações (exibe "Desconhecido").
+  - Detecção de expulsões e banimentos ajustada para considerar apenas eventos
+    ocorridos nos últimos 5 minutos.
+  - O sistema de logs trata erros pontuais sem interromper o funcionamento.
+  - Alterações nos canais de log configurados são atualizadas pelo bot a cada 5
+    minutos.
+
+Configuração:
+
+  - Cargos como @everyone ou cargos pertencentes a bots não podem mais ser
+    definidos como cargos de recompensa ou verificação.
+  - O bot avisa caso você tente configurar um cargo que esteja acima da
+    hierarquia do próprio bot.
+  - O comando /sugestao pode ser usado diretamente nas mensagens privadas com o
+    bot.
+
+Novo Comando: /testar_bot (Exclusivo para o dono do bot) Ferramenta interativa
+de diagnósticos que testa banco de dados, criptografia, módulos e permissões sem
+alterar as configurações reais da loja. Permite simular compras, sorteios,
+cupons e suporte em um ambiente isolado.
+
+Segurança Interna:
+
+  - O bot exige a chave de criptografia configurada no arquivo de ambiente
+    (.env) para iniciar, garantindo a proteção e o acesso às chaves Pix.
+  - Utilitário de criptografia via linha de comando corrigido.
+  - Adicionadas proteções nas consultas do banco de dados para evitar injeções
+    de dados maliciosos.
+  - Em caso de falha temporária no banco de dados durante a verificação de um
+    usuário, o sistema bloqueia o acesso por precaução.
+  - Estrutura do banco de dados atualizada para funcionar sem erros em
+    instalações novas e antigas.
+  - O banco de dados impede a inclusão de itens duplicados no carrinho por
+    cliques repetidos.
+
+Visual e Usabilidade:
+
+  - Mensagens longas enviadas no suporte privado são divididas para respeitar o
+    limite de caracteres do Discord.
+  - O sistema reconhece valores digitados com pontos ou vírgulas
+    (exemplo: 1.500,00 ou 1500.00).
+  - Nomes de arquivos de backup com caracteres especiais são corrigidos
+    automaticamente.
+  - Alertas nos logs caso o arquivo de backup ultrapasse o limite de envio do
+    Discord.
+  - O sistema de avaliações aceita apenas notas numéricas de 1 a 5.
+  - Cadastro de produtos com preço ou estoque negativo é bloqueado no comando e
+    nas telas de edição.
 
-### 🛒 Compras e Pagamentos (o que mais quebrou)
+Estabilidade Geral:
 
-**✅ Nome do produto agora atualiza no painel automaticamente**
-Antes, quando você editava o nome de um produto, o painel continuava mostrando o nome velho. Agora, se você mudar o nome, **todos os painéis atualizam sozinhos na hora** — não precisa mais recriar nada.
+  - Erros no carregamento de um módulo individual não impedem mais a
+    inicialização do bot.
+  - Conexões com o banco de dados e serviços externos são encerradas
+    corretamente ao desligar o bot.
+  - Logs de reconexão do console organizados e sem mensagens repetidas.
+  - Arquivos de histórico da conversa têm limite de tamanho para evitar alto uso
+    de memória.
+  - Comandos que afetam todos os membros do servidor agora recarregam a lista
+    completa de usuários antes de executar.
+  - Ações em massa exibem um contador atualizado a cada 100 envios.
 
-**✅ Estoque não fica negativo nunca mais**
-Antes, se duas pessoas comprassem o último item ao mesmo tempo, o estoque podia ficar **negativo** (-1, -2...) e quebrava tudo. Agora o bot **trava** — se não tem estoque, não vende, simples assim.
+Resumo dos Principais Pontos:
 
-**✅ Bot devolve o estoque se a compra falhar no meio**
-Se você tinha um carrinho com 3 itens e o bot conseguiu decrementar o item 1 e 2, mas o item 3 tava sem estoque, antes o item 1 e 2 ficavam "perdidos". Agora o bot **devolve** o que já tinha tirado e te avisa.
+1.  Cliente não consegue mais confirmar o próprio pagamento.
+2.  Sorteios não declaram mais de um vencedor por erro de duplicação.
+3.  Painel de controle da loja continua funcionando após o bot reiniciar.
+4.  Suporte via mensagem privada totalmente protegido contra acessos indevidos.
+5.  Estoque com trava para evitar números negativos.
+6.  Histórico de conversa salvo antes de apagar qualquer ticket cancelado.
+7.  Chave de criptografia obrigatória na inicialização do sistema.
+8.  Novo comando /testar_bot para testes e diagnósticos com segurança.
 
-**✅ Cupom não pode mais ser usado duas vezes**
-Antes, se você clicasse rápido demais em "finalizar compra" com um cupom, dava pra usar o **mesmo cupom duas vezes** (dei sorte e paguei metade do preço). Agora o bot **bloqueia** — se o cupom já foi usado, ele avisa e cancela a compra.
+v3.0 (20/06/2026)
 
-**✅ Cupom público não passa do limite**
-Se você criou um cupom "PROMO10" com máximo de 10 usos, antes podia acontecer de 11 ou 12 pessoas conseguirem usar (por clicarem no mesmo segundo). Agora **trava certinho no limite**.
+Estabilidade do Banco de Dados (SQLite WAL):
 
-**✅ Carrinho grátis (R$ 0,00) funciona**
-Agora se um produto custa R$ 0,00 ou se um cupom de 100% zera o carrinho, o bot **pula o PIX** e mostra "Pedido Gratuito!". Antes ele tentava gerar um PIX de R$ 0,00 e dava erro.
+  - Ativação do modo WAL e aumento do tempo limite de espera para 30 segundos,
+    evitando travamentos em momentos de grande acesso no banco de dados.
+  - Garantia do funcionamento de regras de exclusão de dados em cascata em todas
+    as conexões.
 
-**✅ Reconfere o estoque na hora de finalizar**
-Antes, o bot só conferia o estoque quando o admin ia confirmar o pagamento (às vezes horas depois). Se o estoque acabou nesse meio tempo, o cliente perdia o cupom e o carrinho. Agora o bot **reconfere na hora** que o cliente finaliza — se acabou, avisa antes de criar o ticket.
+Correções no Carrinho de Compras:
 
-**✅ Nome do produto no menu dropdown também atualiza**
-Aquele menuzinho onde o cliente escolhe o produto também mostrava o nome velho. Agora mostra o nome atual.
+  - Ajustes no fluxo de alteração de quantidades e cupons no carrinho para
+    evitar mensagens de erro na tela.
+  - Bloqueio da finalização de compras caso a chave Pix não esteja cadastrada ou
+    esteja ilegível no banco de dados.
 
----
+Acesso Administrativo:
 
-### 🧹 Cancelamento de Pedidos
+  - A equipe da loja mantém acesso aos comandos de configuração, mesmo que a
+    loja esteja suspensa por faturas pendentes, permitindo regularizar o acesso.
 
-**✅ Dois admins cancelando ao mesmo tempo não duplica o estoque**
-Antes, se dois gerentes clicassem em "Cancelar Pedido" quase ao mesmo tempo, o bot devolvia o estoque **duas vezes** (voltava mais do que tinha). Agora o bot **bloqueia** o segundo clique — só o primeiro cancela.
+Atendimento (Modmail) e Sistema de Segurança:
 
-**✅ Transcript agora é gerado quando você cancela**
-Antes, quando você cancelava um pedido, o canal de logs só recebia uma mensagem simples dizendo "ticket cancelado", mas **perdia todo o histórico da conversa**. Agora o bot gera o transcript HTML completo **antes** de deletar o canal e envia pro canal de logs. Nada mais se perde.
+  - Busca no sistema do Discord caso o canal de atendimento não seja localizado
+    de imediato, evitando criação de tickets duplicados.
+  - Corrigido o envio de imagens sem texto nas mensagens de atendimento.
+  - Trava para impedir a abertura de múltiplos tickets caso o usuário envie
+    várias mensagens seguidas no privado.
+  - Corrigida a falha de carregamento do módulo de atendimento.
+  - Sistema de verificação visual (CAPTCHA) adaptado para funcionar corretamente
+    em servidores Linux.
 
----
+14/04/2026
 
-### 🎫 Cupons
+Servidor de hospedagem ativo novamente.
 
-**✅ Não deixa mais criar cupom com desconto maior que 100%**
-Antes, um admin podia (sem querer) criar um cupom de 150% de desconto. Isso fazia o preço ficar **negativo** (o cliente "receberia" dinheiro) e o PIX quebrava. Agora o bot **só aceita entre 1% e 100%**.
+v2.5 (15/01/2026)
 
-**✅ Não deixa mais criar cupom com número de usos negativo (tipo -5)**
-Se você digitava -5 em "usos máximos" achando que era infinito, o cupom ficava **bugado e nunca podia ser usado**. Agora o bot avisa: use -1 para infinito ou um número positivo.
+Corrigido um problema onde itens com nomes espelhados podiam causar falhas no
+sistema.
 
-**✅ Resgatar cupom por mensagens não dá mais cupom infinito**
-Antes, se você clicasse rápido em `/cupom resgatar` várias vezes, o bot podia te dar vários cupons gastando as mensagens só uma vez. Agora cada resgate **debita as 20 mensagens de verdade** — se não tem mensagens suficientes, não resgata.
+v2.4 (12/01/2026)
 
----
+Adicionado suporte direto por mensagem privada (DM). Basta enviar uma mensagem
+no privado do bot para iniciar um atendimento (recurso restrito a donos de
+servidores e lojas).
 
-### 🎁 Sorteios
+v2.3 (12/01/2026)
 
-**✅ Sorteio não finaliza duas vezes**
-Antes, se o sorteio demorasse pra acabar e o bot checasse de novo, ele podia **sortear dois vencedores diferentes** pro mesmo sorteio (todo mundo via ganhadores diferentes). Agora o bot **trava** — quando tá finalizando um, não deixa outro processo tocar nele.
+Adicionado comando para envio de sugestões. Adicionado comando para avisos sobre
+futuras atualizações e correções do bot.
 
-**✅ Botão de "Participar" não dá entrada grátis se falhar o débito**
-Se o sorteio custava 50 mensagens pra entrar e o débito falhava (erro de banco), antes o usuário entrava **de graça**. Agora o bot avisa o erro e **não conta a entrada**.
+v2.2 (11/01/2026)
 
-**✅ Criar sorteio com requisito de cargo errado não trava mais**
-Se você digitava um número errado no campo de cargos, o bot crashava. Agora ele **ignora o erro** e cria o sorteio sem requisito de cargo.
+Exibição da quantidade de estoque adicionada diretamente no painel de produtos.
+Adicionado comando para sugestões de novas funções para o bot. Imagem
+demonstrativa: https://iili.io/fvISg1I.png
 
----
+v2.1 (11/01/2026)
 
-### 📧 Modmail (Suporte)
+O bot está online novamente. Caso precise de suporte, acesse o servidor no
+Discord: https://discord.gg/rPFqpK2gqX
 
-**✅ Botão de "Fechar Ticket" só pra admin**
-Antes, **qualquer pessoa** que visse o canal do ticket podia clicar em "Fechar Ticket" e apagar tudo. Agora **só admin** (dono do bot ou quem tem permissão de gerenciar servidor) consegue fechar.
+v2.0 (29/09/2025)
 
-**✅ Só staff responde pelo canal do ticket**
-Antes, se um cliente comum conseguisse ver o canal do ticket (por erro de permissão), ele podia **fingir ser atendente** e mandar mensagens pro cliente pela DM do bot. Agora o bot **ignora** mensagens de não-staff no canal do ticket.
+Novas Funcionalidades para Clientes:
 
-**✅ Bot limpa a memória do modmail**
-Antes, se você mandasse uma DM pro bot e não respondesse o "qual o motivo?", o bot **lembrava disso pra sempre** (vazamento de memória lento). Agora ele limpa isso a cada 30 minutos.
+  - Painel central (/minha_loja) com acessos rápidos para: Ver Sacola,
+    Histórico, Gasto Total e Cupons.
 
----
+Novas Funcionalidades para Administradores:
 
-### 🛡️ Permissões e Segurança dos Botões
+  - Painel fixo persistente (/gerenciar_loja dashboard_fixo), mantido mesmo após
+    reinicializações.
+  - Gerenciamento de produtos direto na lista (/produto listar) com menu de
+    seleção e botões para Editar e Excluir.
 
-**✅ Cliente não pode mais auto-confirmar pagamento**
-Esse era um bug **crítico**: o cliente podia clicar em "✅ Pagamento OK" no próprio ticket e o bot aceitava! O cliente recebia o produto sem ter pago. Agora **só staff** consegue clicar nesse botão.
+Correções de Bugs e Estabilidade:
 
-**✅ Cliente não pode mais auto-finalizar pedido**
-Mesma coisa do botão "Entregue! Finalizar" — só staff agora.
+  - Corrigida a falha onde botões mostravam a mensagem "Esta interação falhou".
+  - Trava de segurança nos botões de gerenciamento (apenas administradores podem
+    acionar).
+  - Sistema de exibição de erros padronizado.
 
-**✅ Qualquer um não pode mais encerrar sorteio alheio**
-Os botões de admin do sorteio (Finalizar, Rerolar, Cancelar, Excluir) não tinham proteção. **Qualquer membro** podia clicar e estragar o sorteio. Agora **só o dono do sorteio ou admins**.
+v1.4 (28/09/2025)
 
-**✅ Dashboard fixo protegido**
-O painel fixo de admin (gerenciar produtos/painéis) não tinha proteção. **Qualquer um** podia clicar nos botões. Agora **só staff**.
+Correções de Lógica e Permissões:
 
-**✅ Botão de fechar ticket de suporte protegido**
-Os botões "Resolvido!" e "Fechar Ticket" dos tickets de suporte agora **só staff** consegue clicar. O "Iniciar Suporte" continua liberado pra todo mundo.
+  - Donos de servidores agora conseguem usar os comandos de configuração mesmo
+    se não possuírem o cargo de Administrador explicitamente.
+  - O dono do servidor agora é identificado automaticamente como autoridade
+    máxima em todas as verificações de permissão do bot.
 
----
+v1.3 (28/09/2025)
 
-### 🕹️ Dashboard Fixo (Painel de Controle Persistente)
+Novas Funcionalidades:
 
-**✅ Dashboard fixo agora salva de verdade**
-Esse era um bug chato: você criava o dashboard fixo, mas quando o bot reiniciava, os botões paravam de funcionar (o ID da mensagem **não tava sendo salvo no banco**). Agora salva certinho — o dashboard **continua funcionando** depois de reiniciar.
+  - Opção para personalizar o campo de instruções de entrega (/configurar
+    campo_entrega).
+  - Todas as compras agora passam obrigatoriamente pela sacola antes da
+    finalização.
 
-**✅ Bot recarrega o dashboard ao ligar**
-Agora quando o bot liga, ele procura no banco todos os dashboards fixos e **reativa os botões** automaticamente.
+Segurança e Permissões:
 
----
+  - O bot não gera alertas de exclusão indevida quando ele mesmo faz a remoção
+    do ticket.
+  - Ajustadas as permissões dos botões dentro dos tickets de atendimento.
 
-### 🔐 Licenças e Faturamento (Admin do Bot)
+Bugs Corrigidos:
 
-**✅ Botões de licença agora verificam se é o dono**
-Os botões de "Aprovar Licença", "Bloquear/Desbloquear Loja" etc. que vão pra DM do dono do bot não verificavam quem tava clicando. Se por acaso essa mensagem fosse parar em outro canal, **qualquer um** podia aprovar licença grátis. Agora **só o dono do bot** consegue.
+  - Corrigido uma falha de leitura no módulo de registros do sistema (logs).
 
-**✅ Aprovar licença não zera mais a comissão devedora**
-Bug grave: se um lojista devia R$ 50 de comissão e comprava uma licença premium, o bot **zerava a dívida** (lavagem de dívida). Agora a comissão devedora **continua lá** — só fatura de comissão paga zera a comissão.
+v1.2 (28/09/2025)
 
-**✅ Lembrete de licença vencendo não spamma mais**
-Antes, o bot mandava **1 DM por hora** pro dono do servidor nos dias 0, 2 e 6 antes de vencer (até 24 DMs por dia!). Agora manda **uma só por dia**.
+Bugs Corrigidos:
 
----
+  - Ajustado o tempo de resposta do bot ao abrir formulários para evitar a
+    mensagem de erro "Interação Desconhecida".
+  - Comandos de configuração do Pix (/configurar pix) e de canais (/configurar
+    canais) otimizados para responder mais rápido.
 
-### 🔎 Logs e Auditoria
+v1.1 (26/09/2025)
 
-**✅ Logs de entrada/saída de membros não bugam mais**
-Antes, se um membro entrasse e saísse rápido (ou se o bot não tivesse a data de entrada), o log **crashava** e não mostrava nada. Agora mostra "Desconhecido" em vez de quebrar.
+Segurança:
 
-**✅ Detecção de kick/ban não confunde mais**
-Antes, o bot olhava os últimos 5 registros de kick/ban e podia **confundir** um kick antigo com um novo. Agora ele só considera kicks/bans dos **últimos 5 minutos** — bem mais preciso.
+  - Sistema de auditoria que identifica o responsável por apagar canais de
+    tickets, gerando um histórico da conversa e alertando a administração.
 
-**✅ Bot não engole mais erros silenciosamente**
-O logger usava `except:` genérico que engolia TUDO (inclusive sinais de desligamento). Agora usa exceções específicas — se algo quebra, aparece no log.
+Permissões:
 
-**✅ Logger atualiza quando você reconfigura os canais**
-Antes, se você mudasse a categoria de tickets, o logger **continuava usando a categoria velha** até reiniciar o bot. Agora ele **atualiza sozinho** a cada 5 minutos.
+  - Permissões reestruturadas para dar prioridade total a administradores em
+    qualquer ação.
 
----
+Bugs Corrigidos:
 
-### 🛠️ Configuração
-
-**✅ Cargos @everyone e de bot são rejeitados**
-Se você tentasse usar @everyone ou um cargo de bot como "cargo de recompensa" ou "cargo verificado", o bot aceitava mas **nunca conseguia aplicar** (sem permissão). Agora ele **avisa na hora** que esse cargo não serve.
-
-**✅ Verificação de hierarquia de cargos**
-Se você tentar definir um cargo que está **acima do bot** na hierarquia, o bot avisa: "Não consigo gerenciar esse cargo, mova meu cargo acima dele".
-
-**✅ `/sugestao` funciona em DM também**
-Antes, se você mandasse `/sugestao` por DM, o bot **crashava**. Agora funciona normal.
-
----
-
-### 🧪 Comando Novo: /testar_bot (SÓ PRA O DONO DO BOT)
-
-**✅ Comando de autoteste interativo**
-Agora o dono do bot tem um comando `/testar_bot` que:
-
-1. **Faz testes automáticos** — verifica se o banco tá OK, se a criptografia funciona, se os cogs carregaram, se as tarefas tão rodando, se o bot tem as permissões necessárias, etc. Tudo sem alterar nada.
-
-2. **Cria um ambiente de teste de mentira** — o bot cria uma categoria "🧪 Teste do Bot" com um canal, um produto de teste, um painel de teste, e configura a categoria de tickets temporariamente. **Não mexe nos seus dados reais**.
-
-3. **Te guia pelos testes** com botões interativos:
-   - 🛒 **Testar Compra** — te diz pra comprar o produto de teste, e depois verifica se o ticket foi criado, se o PIX gerou, etc.
-   - 🎁 **Testar Sorteio** — cria um canal e te orienta a fazer um sorteio de 1 minuto
-   - 🎟️ **Testar Cupom** — cria um cupom de teste e te orienta a aplicar
-   - 📧 **Testar Modmail** — te orienta a abrir um ticket via DM
-   - 🧹 **Limpar** — apaga TUDO que foi criado no teste e restaura a configuração original
-
-É tipo um "modo de diagnóstico" — você consegue testar tudo sem medo de estragar a loja real.
-
----
-
-### 🔒 Segurança Interna (coisas que ninguém vê mas importam)
-
-**✅ Chave de criptografia agora é obrigatória**
-Antes, se você esquecesse de configurar a `ENCRYPTION_KEY` no `.env`, o bot **gerava uma temporária** e iniciava normal. Mas quando reiniciava, **todas as chaves PIX criptografadas ficavam irrecuperáveis** (perda permanente de dados). Agora o bot **recusa iniciar** e te diz exatamente o que fazer.
-
-**✅ `python -m crypto` funciona de novo**
-Corrigido o bug onde o comando pra gerar a chave **também crashava** (loop infinito de erro). Agora você roda `python -m crypto` e ele te dá a chave, mesmo que o `.env` esteja vazio ou com chave inválida.
-
-**✅ Bot não deixa o banco virar bagunça se alguem invadir**
-Adicionadas "whitelists" nas funções que montam SQL dinâmico — se alguem tentar injetar colunas maliciosas, o bot **rejeita**. (Não havia exploração ativa, mas é prevenção.)
-
-**✅ Bloqueios falham "fechados"**
-Se o banco cair no meio de uma verificação de "esse usuário tá bloqueado?", antes o bot tratava como **não bloqueado** (falha aberta = perigosa). Agora trata como **bloqueado** (falha fechada = segura) — prefere bloquear à toa do que deixar passar.
-
-**✅ Migração do banco funciona em instalações novas**
-Tinha um bug onde uma migração antiga (v7) quebrava em bancos novos por causa de uma mudança do SQLite. Agora funciona em banco novo E existente.
-
-**✅ Índice único no carrinho anti-duplicata**
-Agora o banco **não deixa** criar dois itens iguais no carrinho (mesmo usuário, mesmo servidor, mesmo produto). Antes, cliques rápidos podiam duplicar itens no carrinho.
-
----
-
-### 🎨 Correções Visuais e de UX
-
-**✅ Mensagens longas no modmail não quebram mais**
-Se alguém mandava uma DM de 2500 caracteres, o bot **crashava** ao tentar retransmitir. Agora ele **corta** em 1900 caracteres (limite seguro do Discord).
-
-**✅ Preço com vírgula e ponto funciona**
-Antes, se você digitava "1.500,00" (formato brasileiro com separador de milhar), o bot **rejeitava**. Agora ele entende tanto "1.500,00" quanto "1,500.00" quanto "1500.00".
-
-**✅ Nome do arquivo de backup não quebra com caracteres especiais**
-Se o servidor tinha nome com emoji ou caractere especial, o backup **falhava** ao salvar o arquivo. Agora o nome é limpo (só letras, números, espaço, - e _).
-
-**✅ Backup muito grande não trava mais**
-Se o backup passasse de 8 MB (limite do Discord), o bot **falhava silenciosamente** e você perdia o backup. Agora ele **avisa no log** que passou do limite.
-
-**✅ Avaliações com número errado não quebram mais**
-Se alguém digitava "9" ou "abc" no campo de estrelas (1-5), o bot aceitava e zoava a média. Agora **só aceita 1, 2, 3, 4 ou 5**.
-
-**✅ Criar produto com preço/estoque negativo não deixa mais**
-Antes, se você digitava preço -10 ou estoque -50 (sem querer, claro), o bot aceitava e quebrava o PIX. Agora **rejeita na hora** tanto no comando `/produto adicionar` quanto no modal de editar.
-
----
-
-### ⚡ Estabilidade Geral
-
-**✅ Bot não morre mais se um cog quebrar ao importar**
-Antes, se tivesse um erro de importação em qualquer View, o bot **inteiro não ligava**. Agora ele **pula** a View com problema e continua — o bot liga mesmo com parcial de funcionalidades.
-
-**✅ Bot fecha direitinho ao desligar**
-Agora quando o bot desliga (por erro ou Ctrl+C), ele **fecha as conexões direito** antes. Antes podia ficar "fantasma" online por uns minutos no Discord.
-
-**✅ Reconnect não spamma mais o log**
-Antes, cada reconexão do Discord imprimia o banner inteiro de "Bot conectado como...". Agora só mostra "Reconectado" — log muito mais limpo.
-
-**✅ Transcript não derruba o bot com imagem gigante**
-Antes, se uma imagem muito grande fosse arquivada no transcript, o bot podia **ficar sem memória e morrer**. Agora ele **limita a 25 MB** por arquivo e rejeita URLs suspeitas (proteção contra SSRF).
-
-**✅ Ações em massa não pegam cache incompleto**
-Antes, `/acao_massiva` (remover cargo de todos, DM pra todos) só funcionava nos membros **que o bot tinha em cache** (podia ser metade do servidor). Agora o bot **força carregar todos os membros** antes de agir.
-
-**✅ Barra de progresso nas ações em massa**
-Agora quando o bot tá mandando DM pra galera toda, ele **atualiza a mensagem** a cada 100 enviadas, pra você saber que tá funcionando e não travou.
-
----
-
-### 📦 Resumo pra quem tem pressa
-
-**O que mais importava:**
-1. 🛒 Cliente não auto-confirma mais pagamento (fraude fechada)
-2. 🎁 Sorteio não finaliza duas vezes (bug crítico)
-3. 🕹️ Dashboard fixo agora persiste entre restarts
-4. 📧 Modmail protegido (só admin fecha, só staff responde)
-5. 🛒 Estoque não fica negativo
-6. 🧹 Transcript gerado ao cancelar (não perde mais histórico)
-7. 🔐 Chave de criptografia obrigatória (sem perda de dados)
-8. 🧪 Novo comando `/testar_bot` pra testar tudo sozinho
-
----
-
-### v3.0 (20/06/2026)
-
-**⚡ Estabilidade do Banco de Dados (SQLite WAL)**
-*   Ativação do modo WAL (Write-Ahead Logging) e timeout estendido para 30 segundos, mitigando erros de travamento ("database is locked") durante picos de escrita concorrente (como no contador de mensagens).
-*   Garantia de execução uniforme do comando `PRAGMA foreign_keys = ON` em todas as conexões criadas para assegurar a consistência dos dados nas exclusões em cascata.
-
-**🛒 Correções Críticas na Sacola e Carrinho**
-*   Corrigido o crash no fluxo de edição da sacola (aplicação de cupons e ajuste de quantidade), substituindo chamadas conflitantes de resposta de interação após adiamento por um fluxo resiliente com `is_done()`.
-*   Implementada proteção que bloqueia a finalização se a chave PIX não estiver configurada no banco, evitando que clientes preencham o formulário e fiquem com a tela travada.
-*   Adicionada segurança para interromper o fluxo com um aviso se a chave PIX do servidor estiver corrompida ou impossível de descriptografar.
-
-**🔧 Acesso Administrativo e Desbloqueio de UX**
-*   Removida a trava de bloqueio de loja das permissões de gerente. Agora, mesmo se a loja for suspensa por faturas vencidas, a equipe administrativa retém acesso total aos comandos de configuração, diagnóstico e faturamento para resolver o problema.
-
-**🛡️ Otimização do Modmail (Suporte Central) e CAPTCHA**
-*   Correção de falha que gerava tickets duplicados quando canais ativos de suporte não eram retornados pelo cache local do Discord, implementando busca de fallback na API (fetch_channel) como alternativa.
-*   Correção de erro HTTP 400 ao enviar mídias (imagens) sem texto associado nas mensagens de Modmail.
-*   Implementação de trava de concorrência que impede a abertura de múltiplos canais caso ocorra spam de mensagens na DM durante o processamento inicial.
-*   Corrigida falha no carregamento do Cog do Modmail que causava falha crítica de inicialização (`TypeError: unknown parameter given: usuario`) devido à incompatibilidade de nomes no decorator `@app_commands.describe`.
-*   Adaptabilidade aprimorada do CAPTCHA em sistemas operacionais Linux com fallback automático de fontes escaláveis do sistema e controle de densidade de ruído para evitar que fontes bitmap padrão fiquem ilegíveis.
-
----
-
-### 14/04/2026
-Host voltou eu acho, ainda não morreu
-
-### v2.5 (15/01/2026)
-Corrigido um bug com itens com nomes espelhados, ainda tem chance de acontecer, mas to tentando corrigir
-
-### v2.4 (12/01/2026)
-Adicionado suporte via dm, basta mandar mensagem no privado do bot para iniciar atendimento
-(chat restrito a donos de svs e de lojas)
-
-### v2.3 (12/01/2026)
-Adicionado um comando para enviar sugestões
-E outro para avisar vocês de futuros updates ou correção do bot
-
-### v2.2 (11/01/2026)
-Adicionado estoque no próprio painel para facilitar a visibilidade do estoque
-Adicionado comando para sugestão de funções para o bot
-https://iili.io/fvISg1I.png
-
-### v2.1 (11/01/2026)
-É... bot voltou a vida e link pra um discord caso precisem de ajuda .=.
-https://discord.gg/rPFqpK2gqX
-
-### v2.0 (29/09/2025)
-
-✨ Novas Funcionalidades para Clientes
-
-Hub Pessoal (/minha_loja): painel central com botões rápidos:
-🛒 Ver Sacola • 📜 Histórico • 💸 Gasto Total • 🎟️ Cupons.
-
-🚀 Novas Funcionalidades para Administradores
-
-Dashboard fixo (/gerenciar_loja dashboard_fixo): painel persistente, reativado após reinicializações.
-
-Gerenciamento de produtos com ações diretas: /produto listar → menu suspenso + botões de [✏️ Editar] e [🗑️ Excluir].
-
-🐞 Correções de Bugs e Estabilidade
-
-Corrigida falha de persistência em Views ("Esta interação falhou").
-
-Verificação de permissão adicionada em botões de painéis (apenas admins podem gerenciar).
-
-Corrigidas mensagens de erro duplicadas → sistema de erros centralizado.
-
-✅ Resultado: Experiência muito mais visual, intuitiva e profissional para clientes e administradores.
-
-### v1.4 (28/09/2025)
-
-⚙️ Correções de Lógica e Permissões
-
-Corrigida falha que impedia donos de servidores de usar comandos de configuração sem cargo de Administrador.
-
-Função has_config_permission reescrita:
-
-Confere se o usuário é discord.Member.
-
-Concede acesso imediato se for o guild.owner_id.
-
-Caso contrário, verifica se tem cargo de Administrador.
-
-✅ Resultado: Donos de servidores agora sempre reconhecidos como autoridade máxima. Sistema de permissões unificado e consistente com a hierarquia padrão do Discord.
-
-### v1.3 (28/09/2025)
-
-✨ Novas Funcionalidades
-
-Campo de entrega personalizável → novo comando /configurar campo_entrega.
-
-Fluxo de compra unificado pela sacola → compras diretas removidas; todas passam pela sacola.
-
-🛡️ Segurança e Auditoria
-
-Alertas inteligentes (anti-autodenúncia) → bot ignora alertas quando ele mesmo exclui tickets.
-
-⚙️ Permissões
-
-Permissões em botões de tickets refinadas → donos/admins sempre mantêm controle, mesmo sendo clientes.
-
-🐞 Bugs Corrigidos
-
-AttributeError no módulo de logs → corrigido acesso de .get() para [...].
-
-✅ Resultado: Bot mais versátil para diferentes lojas, mais seguro contra fraudes e ainda mais estável.
-
-### v1.2 (28/09/2025)
-
-🐞 Bugs Corrigidos
-
-Erro de "Interação Desconhecida" (Timeout 3s) → modal aberto imediatamente; banco só processa depois.
-
-/configurar pix → comando estável, imune a atrasos de latência.
-
-/configurar canais → fortalecido pela lógica aprimorada de modais.
-
-✅ Resultado: Comandos com formulários (modais) estão muito mais robustos e confiáveis.
-
-### v1.1 (26/09/2025)
-
-🔒 Segurança
-
-Sistema de auditoria anti-exclusão de tickets → identifica responsável, gera transcrição e envia alerta ao dono do bot.
-
-⚙️ Permissões
-
-Reestruturação completa de permissões → administradores têm prioridade total em qualquer ação.
-
-🐞 Bugs Corrigidos
-
-Erro de inicialização (View não persistente) → botões agora têm custom_id.
-
-Erro NameError (SHOP_GROUP) → corrigido nome de variável.
-
-Erro na transcrição (.get() em sqlite3.Row) → acesso corrigido para dicionário.
-
-Condição de corrida (canal já deletado) → transcrição agora usa mensagens salvas no banco caso não consiga acessar histórico.
-
-✅ Resultado: Bot mais estável, seguro e permissões funcionando corretamente.
+  - Adicionados identificadores fixos nos botões para continuarem funcionando
+    após o bot reiniciar.
+  - Corrigidos erros de nomenclatura de variáveis internas.
+  - Ajustado o sistema de geração de histórico de conversa para salvar as
+    mensagens via banco de dados caso o canal seja deletado rapidamente.
