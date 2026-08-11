@@ -1,5 +1,9 @@
 Changelog - TuCaNo Store
 
+v3.8 - Atualização de bug (10/08/2026)
+
+Por algum motivo o canal pega bot tinha sumido dos comando do bot, corrigido
+
 v3.7 - Atualização de Funcionalidades (02/08/2026)
 
 Adicionado uma função que envia erros para mim, assim corrijo mais rápido alguns problemas
