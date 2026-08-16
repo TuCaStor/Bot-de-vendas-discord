@@ -6,6 +6,25 @@ Multi-servidor: cada servidor configura sua própria loja com produtos, preços,
 
 ---
 
+## 🚀 Adicione o Bot ao seu Servidor
+
+```
+https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8&scope=bot
+```
+
+> ⚠️ O bot precisa da permissão **Administrador** para funcionar corretamente (criar canais, cargos, gerenciar mensagens, bans, etc).
+
+**Permissões essenciais:**
+- ✅ Criar Convite (sistema de convites)
+- ✅ Gerenciar Servidor (tracking de invites)
+- ✅ Banir Membros (honeypot)
+- ✅ Gerenciar Canais (tickets)
+- ✅ Gerenciar Cargos (verificação, recompensas)
+- ✅ Ler Histórico de Mensagens (transcripts)
+- ✅ Gerenciar Mensagens (moderação)
+
+---
+
 ## ✨ Funcionalidades
 
 ### 🛒 Loja e Compras
@@ -250,27 +269,6 @@ Multi-servidor: cada servidor configura sua própria loja com produtos, preços,
 
 ---
 
-## 🚀 Adicionar o Bot ao seu Servidor
-
-**Link de convite:**
-
-```
-https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8&scope=bot
-```
-
-> ⚠️ O bot precisa da permissão **Administrador** para funcionar corretamente (criar canais, cargos, gerenciar mensagens, bans, etc).
-
-### Permissões essenciais
-- ✅ Criar Convite (sistema de convites)
-- ✅ Gerenciar Servidor (tracking de invites)
-- ✅ Banir Membros (honeypot)
-- ✅ Gerenciar Canais (tickets)
-- ✅ Gerenciar Cargos (verificação, recompensas)
-- ✅ Ler Histórico de Mensagens (transcripts)
-- ✅ Gerenciar Mensagens (moderação)
-
----
-
 ## ⚙️ Configuração Inicial (Após adicionar o bot)
 
 1. **Configure o PIX**: `/configurar pix` — defina a chave PIX do seu servidor
@@ -366,12 +364,3 @@ botvenda/
 ## 📝 Licença
 
 Uso pessoal. Entre em contato com o dono do bot para uso comercial.
-
----
-
-## 🔗 Links
-
-**Adicione o bot ao seu servidor:**
-```
-https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8&scope=bot
-```
