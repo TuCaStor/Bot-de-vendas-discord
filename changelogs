@@ -1,43 +1,157 @@
 Changelog - TuCaNo Store
 
+v4.0 - Grande Atualização de Funcionalidades (16/08/2026)
+
+Esta é a maior atualização desde o v3.0. Foram adicionados 4 novos sistemas
+completos e várias melhorias de segurança. Veja os detalhes:
+
+Novo Sistema: Convites com Recompensa (/convite)
+
+  - Sistema completo de convites com recompensa automática.
+  - Modelo "1 convite = 1 ciclo": cada usuário só pode ter 1 convite ativo
+    por vez. Após bater a meta e resgatar, pode criar outro.
+  - Tracking automático: o bot detecta quem convidou quem (via snapshot de
+    invites do Discord) e incrementa o contador automaticamente.
+  - Notificação por DM: ao bater a meta, o usuário recebe uma mensagem
+    avisando que pode resgatar.
+  - Resgate via ticket: /convite resgatar abre um canal privado com a staff.
+  - Cargo automático ao resgatar (opcional).
+  - Ranking de convidadores do servidor (/convite ranking).
+  - Recuperação de convite: /convite meu_convite mostra o link se o usuário
+    perdeu.
+  - Configurável: admin define threshold, recompensa, cargo e categoria de
+    ticket via /convite admin_configurar.
+
+Novo Sistema: Honeypot Anti-Hack (/honeypot)
+
+  - Canal armadilha que bane automaticamente quem envia qualquer mensagem.
+  - Captura contas comprometidas, bots de spam e selfbots que varrem canais
+    enviando golpes (free nitro, robux grátis, etc).
+  - Ban temporário com desbanimento automático após X dias (configurável,
+    padrão 7 dias).
+  - Staff (admin+, dono do servidor, bots) é isento do ban automático.
+  - Mensagem de aviso fixada automaticamente no canal ao ativar.
+  - Log de capturas e desbanimentos no canal de logs do servidor.
+  - Comando /honeypot desbanir para remover o ban manualmente.
+
+Cupons Vinculados a Produto Específico
+
+  - Agora é possível vincular um cupom a um produto específico. O cupom só
+    funciona se o produto estiver no carrinho, e o desconto é aplicado apenas
+    sobre esse produto (não sobre o subtotal total).
+  - Quantidade mínima para ativar o cupom (ex: exige 5000 unidades de Mush).
+  - Modo "leva tudo": use quantidade_minima = -1 para exigir TODO o estoque
+    atual do produto. O bot ajusta automaticamente quando o estoque muda
+    (não precisa editar o cupom).
+  - Exibição no painel: opcional mostrar o cupom disponível abaixo do
+    produto no painel da loja.
+  - Aplicação automática: opcional sugerir o cupom ao adicionar o produto
+    no carrinho.
+  - Compatível com cupons existentes (product_id vazio = cupom global).
+
+Status Global do Bot
+
+  - Presença rotativa: o bot agora alterna entre várias atividades a cada 45
+    segundos, mostrando servidores, membros, vendas totais, receita, lojas
+    ativas, produtos à venda e tempo online.
+  - Comando /status_publico: qualquer usuário pode ver um resumo público
+    (servidores, membros, vendas) sem expor dados financeiros.
+  - Lojas inativas não são mais contadas (anti-inflação de números).
+
+Limpeza Automática de Lojas Inativas
+
+  - O bot agora detecta quando foi removido de um servidor e marca a loja
+    como inativa (preservando todos os dados financeiros).
+  - Período de carência de 30 dias: se o bot for re-convidado nesse prazo,
+    a loja é reativada sem perder período de teste, comissão devida ou
+    licença (anti-bypass de taxa).
+  - Após 30 dias de inatividade, a loja é purgada automaticamente
+    (liberando espaço no banco).
+  - Comando /limpar_lojas_inativas (exclusivo do dono) para forçar a
+    limpeza ou ver o relatório.
+
+Notificação de Erros via DM
+
+  - Todo erro do bot agora é enviado automaticamente via DM para o dono,
+    com contexto completo (comando, usuário, servidor, canal) e traceback.
+  - Proteção anti-spam: mesmo erro só notifica 1x a cada 30 segundos.
+  - Rate limit global: máximo 10 DMs de erro por minuto. Acima disso,
+    recebe um resumo consolidado.
+  - 3 camadas de captura: erros de slash commands, erros de listeners e
+    erros de tasks em background.
+
+Calculadora de Compra Integrada
+
+  - Ao clicar num produto no painel, agora aparece uma tela com 3 opções:
+    Comprar, Calcular R$ → Qtd e Calcular Qtd → R$.
+  - A calculadora edita a mesma mensagem (sem spam de novas mensagens).
+  - Após calcular, o usuário pode comprar direto a quantidade calculada
+    com 1 clique, ou calcular de novo.
+  - Suporte completo aos dois modelos de preço (por unidade e por milhar).
+
+Correções e Melhorias de Segurança
+
+  - Corrigido bug onde mensagens ephemeral não podiam ser editadas (erro
+    404 Unknown Message na calculadora).
+  - Melhorada a validação de permissões no on_member_remove (log de saída).
+  - O bot agora notifica o dono se uma loja for suspensa por fatura vencida
+    e o dono não puder ser alcançado por DM.
+  - Várias migrações de banco de dados tornaram-se idempotentes (não
+    quebram mais se rodarem 2x).
+  - Adicionados índices no banco para acelerar consultas de painéis e
+    estatísticas.
+
+Resumo dos Principais Pontos:
+
+1.  Novo sistema de convites com recompensa (1 convite = 1 ciclo).
+2.  Novo sistema anti-hack (honeypot com ban temporário).
+3.  Cupons podem ser vinculados a produto específico, com quantidade mínima
+    e modo "leva tudo".
+4.  Status global do bot com presença rotativa mostrando estatísticas.
+5.  Limpeza automática de lojas inativas com anti-bypass de taxa.
+6.  Notificação de erros via DM pro dono (com anti-spam).
+7.  Calculadora integrada ao fluxo de compra (R$ ↔ Qtd).
+8.  Versão do banco: v24 (com migrações automáticas e idempotentes).
+
 v3.8 - Atualização de bug (10/08/2026)
 
-Por algum motivo o canal pega bot tinha sumido dos comando do bot, corrigido
+Por algum motivo o canal pega bot tinha sumido dos comando do bot, corrigido.
 
 v3.7 - Atualização de Funcionalidades (02/08/2026)
 
-Adicionado uma função que envia erros para mim, assim corrijo mais rápido alguns problemas
+Adicionado uma função que envia erros para mim, assim corrijo mais rápido alguns
+problemas.
 
 v3.6 - Atualização de Funcionalidades (26/07/2026)
 
 Corrigido um bug raro que dessincronizava os painéis.
 
-v3.6 - Atualização de Funcionalidades (21/07/2026)
+v3.5 - Atualização de Funcionalidades (21/07/2026)
 
 Adicionado status customizado ao bot, mostrando informações úteis. Caso um item
 seja uma moeda, o bot abre uma janela para calcular a conversão de reais para a
 moeda ou da moeda para reais.
 
-v3.5 - Atualização de Correção de Bugs (21/07/2026)
+v3.4 - Atualização de Correção de Bugs (21/07/2026)
 
 Corrigido um problema na geração do Pix. O bot está ativo novamente. A
 hospedagem continua um pouco instável.
 
-v3.4 - Atualização de Correção de Bugs (29/06/2026)
+v3.3 - Atualização de Correção de Bugs (29/06/2026)
 
 Corrigido um problema em que os detalhes de um membro que saiu do servidor não
 apareciam nos logs.
 
-v3.3 - Atualização de Correção de Bugs (28/06/2026)
+v3.2 - Atualização de Correção de Bugs (28/06/2026)
 
 Corrigido um problema em que as imagens salvas carregavam apenas em parte.
 
-v3.2 - Atualização de Segurança (26/06/2026)
+v3.1 - Atualização de Segurança (26/06/2026)
 
 Novos comandos /protecao. Com isso, foi adicionado um pacote de novos comandos
 voltados para a segurança.
 
-v3.1 - Atualização de Correções e Segurança (23/06/2026)
+v3.0 - Atualização de Correções e Segurança (23/06/2026)
 
 Esta é uma grande atualização de correções. O bot passou por uma auditoria
 completa e dezenas de bugs foram corrigidos. Veja os detalhes:
@@ -202,7 +316,7 @@ Resumo dos Principais Pontos:
 7.  Chave de criptografia obrigatória na inicialização do sistema.
 8.  Novo comando /testar_bot para testes e diagnósticos com segurança.
 
-v3.0 (20/06/2026)
+v2.0 (20/06/2026)
 
 Estabilidade do Banco de Dados (SQLite WAL):
 
