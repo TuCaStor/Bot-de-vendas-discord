@@ -1,5 +1,170 @@
 Changelog - TuCaNo Store
 
+v5.0 - Refatoração Completa, Segurança e Freemium (23/08/2026)
+
+Esta é a maior atualização da história do bot. Todo o código (~17.000 linhas)
+passou por uma auditoria profunda de segurança, performance e estabilidade —
+e o modelo de negócio mudou: o bot agora é FREMIUM, gratuito com limites.
+
+Novo Modelo de Negócio: Freemium (Grátis com Limites)
+
+  - O bot agora é gratuito para usar: sem taxa e sem comissão sobre vendas.
+  - Plano Gratuito: crie até 5 produtos e 2 painéis (vendas ilimitadas,
+    tudo funcionando: tickets, cupons, entrega).
+  - Plano Premium (licença por dias, R$ 0,50/dia): criação ilimitada de
+    produtos e painéis.
+  - Downgrade gracioso: lojas que excedem os limites ao expirar a licença NÃO
+    perdem nada — tudo continua vendendo; apenas não é possível criar novos
+    itens até renovar ou voltar ao limite.
+  - /loja vincular agora ativa a loja de graça (sem período de teste, sem
+    vínculo com faturamento).
+  - /loja plano redesenhado: mostra o plano, o uso dos limites (ex: 3/5
+    produtos, 1/2 painéis) e como fazer o upgrade.
+  - Comissão de 2% desativada para novas vendas. Dívidas antigas continuam
+    visíveis em /loja plano para quitação.
+  - Limites do plano grátis configuráveis pelo dono do bot (arquivo .env).
+
+Auditoria de Segurança Completa
+
+  - Corrigido vazamento de informação: qualquer usuário podia ver a lista de
+    TODOS os servidores do bot ao digitar /botadmin (preenchimento automático).
+  - Backup e restauração de loja agora exigem administrador do servidor.
+    Antes, qualquer gerente de loja podia exportar os dados financeiros dos
+    clientes.
+  - Restauração valida o conteúdo do backup: arquivos adulterados (por
+    exemplo, gastos inflados para ganhar cargos de recompensa de graça) são
+    rejeitados.
+  - Corrigido erro de roteamento de pagamento: uma configuração incompleta
+    podia gerar um Pix com a chave de uma pessoa e o nome de outra, mandando
+    o dinheiro para o destinatário errado. Agora a chave Pix só é usada em
+    conjunto completo e válido.
+  - Relatórios de erro enviados ao dono agora ocultam automaticamente tokens
+    e chaves de criptografia (redação de segredos).
+  - Canal-armadilha (honeypot) não bane mais gerentes da loja por engano —
+    agora a equipe completa é isenta.
+  - Botão de cancelar cobrança de licença agora funciona para o cliente (antes
+    exigia a ação do dono do bot, ou seja, era inútil para quem recebeu a
+    cobrança).
+  - Comandos que crashavam quando usados na mensagem privada do bot foram
+    protegidos (/cupom resgatar, /convite, /honeypot, /modmail_admin e outros).
+  - O cog de testes (/testar_bot) não é mais carregado em produção — só em
+    ambiente de testes, com flag própria.
+
+Fim das Condições de Corrida (cliques duplos e simultâneos)
+
+  - Confirmar pagamento duas vezes (dois gerentes clicando ao mesmo tempo) não
+    deduz o estoque em dobro.
+  - Cancelar pedido em duplicidade não devolve cupom duas vezes.
+  - Aprovar uma licença duas vezes não estende o prazo em dobro.
+  - Resgatar recompensa de convite em duplicidade não gera dois tickets nem
+    conta duas vezes.
+  - Fatura de comissão não é mais duplicada caso o bot reinicie no meio da
+    geração.
+  - Nova quitação de faturas de comissão: botão "Já Paguei" em /loja plano,
+    com trilha de auditoria — antes as faturas nunca podiam ser marcadas como
+    pagas e ficavam pendentes para sempre.
+
+Auto-Reparo do Banco de Dados (migrações v25 → v27)
+
+  - Reparo automático de chave estrangeira corrompida: o erro "no such table:
+    main.coupons_old" (que quebrava a roleta de cupons e a limpeza de lojas
+    inativas) é detectado e corrigido sozinho na inicialização, preservando
+    todos os dados.
+  - Varredura automática de registros órfãos (ex: opções de painel apontando
+    para produtos apagados) — o banco fica com integridade 100% verificada a
+    cada inicialização.
+  - Corrigido bug antigo em que TODAS as restaurações de backup falhavam
+    silenciosamente (incompatibilidade de colunas desde a v3.5).
+  - Limpeza de lojas inativas agora remove TODAS as tabelas da loja (antes
+    sobravam dados órfãos de painéis, armadilhas e convites) e relata falhas
+    honestamente no log.
+  - 9 novos índices de performance (compras, produtos, cupons, faturas,
+    sorteios, atendimento): consultas muito mais rápidas conforme o banco
+    cresce.
+
+Performance e Estabilidade
+
+  - Corrigidos 141 vazamentos de conexão com o banco de dados (conexões nunca
+    eram fechadas e se acumulavam).
+  - Estatísticas globais com cache de 5 minutos: a presença rotativa não faz
+    mais 5 consultas pesadas a cada 45 segundos.
+  - Cerca de 30 operações de banco de dados e a geração de QR Code Pix foram
+    movidas para fora do processamento principal — fim das travadas ao gerar
+    pagamentos.
+  - Contador de mensagens não bloqueia mais o processamento em servidores
+    movimentados.
+  - Entrega registrada imediatamente: se o bot reiniciar durante a avaliação
+    opcional de 30 minutos, a compra não fica mais presa sem baixa no estoque.
+  - Sincronização de comandos com o Discord só quando solicitada
+    (SYNC_COMMANDS=1 no .env) — fim dos rate-limits e do "sumiço" de comandos
+    ao reiniciar o bot.
+  - Notificações de erro ao dono corrigidas: tracebacks longos quebravam a
+    mensagem silenciosamente — a maioria dos erros nunca chegava ao
+    destinatário. Agora todos chegam, com truncagem correta e resumo
+    consolidado.
+
+Documentação e Manutenibilidade
+
+  - ~90% do código documentado (antes ~15%): cada função e comando explica o
+    que faz e quem pode usá-lo.
+  - Verificações de permissão unificadas em um único lugar — antes existiam
+    4 versões diferentes da checagem "é dono do bot" que se contradiziam (o
+    dono passava em uma checagem e era barrado na seguinte).
+  - Mensagens de "sem permissão" não são mais duplicadas.
+  - README completo: estrutura do projeto, tabela de comandos, hierarquia de
+    permissões, guia de instalação e modelo de planos.
+
+Suíte de Testes Automatizados (novidade!)
+
+  - 8 suítes de testes reproduzíveis (168 verificações), executadas em
+    ambiente virtual com bancos temporários — nunca tocam nos dados reais.
+  - Cada correção desta atualização tem teste automatizado correspondente,
+    incluindo a simulação do incidente real de corrupção do banco.
+  - Como rodar: python tests/test_imports.py (e os demais arquivos em tests/).
+
+Correções Adicionais
+
+  - Botão "Meus Cupons" do painel /minha_loja funcionava (não fazia nada) —
+    agora lista os cupons do usuário.
+  - /painel criar agora publica o painel completo, já com a lista de produtos
+    e estoque (antes publicava um painel incompleto até uma sincronização
+    manual).
+  - Sorteios com 0 ou número negativo de vencedores travavam o verificador
+    em loop infinito a cada 15 segundos — agora o próprio Discord valida a
+    quantidade (mínimo 1).
+  - Erros de digitação na duração do sorteio não são mais aceitos ("5m lixo"
+    era interpretado como 5 minutos).
+  - Reroll de sorteio substitui os vencedores anteriores em vez de acumular
+    uma lista infinita de "vencedores".
+  - Verificação por captcha: sessões de múltiplos servidores não se
+    conflitam mais (cada servidor tem sua sessão), e erros em um servidor
+    não bloqueiam a verificação em outro.
+  - Atendimento (modmail) com anti-spam: cooldown de 5 minutos para reabrir
+    tickets e fila de mensagens durante a criação do canal (nada mais é
+    perdido).
+  - Arquivos de histórico (transcripts) corrigidos: emojis voltaram a
+    renderizar (CDN morta substituída) e o contador de imagens arquivadas
+    agora reporta os números reais.
+  - Geração de Pix não cria mais arquivo de imagem na pasta do bot a cada
+    pagamento (limpeza automática em pasta temporária).
+
+Resumo dos Principais Pontos:
+
+1.  Novo modelo Freemium: grátis com 5 produtos e 2 painéis; licença destrava
+    tudo (sem mais comissão sobre vendas).
+2.  Lojas que excedem os limites não perdem nada — downgrade gracioso.
+3.  13 vulnerabilidades de segurança corrigidas (vazamento de dados,
+    escalonamento de permissão, roteamento de pagamento).
+4.  Fim dos bugs de clique duplo: estoque, cupons, licenças e convites.
+5.  Banco de dados com auto-reparo e integridade 100% verificada na
+    inicialização.
+6.  141 vazamentos de conexão corrigidos e 9 índices de performance novos.
+7.  Faturas de comissão antigas finalmente quitáveis ("Já Paguei").
+8.  ~90% do código documentado (antes ~15%) e permissões unificadas.
+9.  168 testes automatizados protegendo todas as correções.
+10. Versão do banco: v27 (migrações automáticas, idempotentes e com
+    auto-reparo).
+
 v4.0 - Grande Atualização de Funcionalidades (16/08/2026)
 
 Esta é a maior atualização desde o v3.0. Foram adicionados 4 novos sistemas
