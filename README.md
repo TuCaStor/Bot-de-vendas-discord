@@ -4,6 +4,25 @@ Bot Discord completo para lojas virtuais com sistema de pagamentos via PIX, tick
 
 Multi-servidor: cada servidor configura sua própria loja com produtos, preços, chave PIX, painéis e regras — de forma 100% independente.
 
+> 💰 **Novo na v5.0: o bot agora é FREMIUM** — gratuito com limites (5 produtos e 2 painéis por servidor, vendas ilimitadas), sem taxa e sem comissão. Quer mais? A licença Premium destrava tudo.
+
+---
+
+## 💰 Planos
+
+| | **Gratuito** 🆓 | **Premium** 💎 |
+|---|---|---|
+| Custo | R$ 0 — sem taxa, sem comissão | R$ 0,50/dia |
+| Produtos | criar até **5** | **ilimitado** |
+| Painéis | criar até **2** | **ilimitado** |
+| Vendas, tickets, cupons, entrega | ✅ ilimitado | ✅ ilimitado |
+
+- **Ativação instantânea**: `/loja vincular` — a loja já nasce no plano Gratuito, sem burocracia
+- **Downgrade gracioso**: sua loja passou do limite quando a licença expirou? **Nada é removido nem bloqueado** — tudo continua vendendo; você só não cria itens novos até renovar ou excluir algo
+- Produtos **inativos/desativados não contam** no limite
+- Veja seu uso a qualquer momento: `/loja plano` (ex: "3/5 produtos, 1/2 painéis")
+- Aumente o limite: `/loja mudardeplano`
+
 ---
 
 ## 🚀 Adicione o Bot ao seu Servidor
@@ -28,6 +47,7 @@ https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8
 ## ✨ Funcionalidades
 
 ### 🛒 Loja e Compras
+- **Planos freemium** — grátis com limites, licença destrava (veja tabela acima)
 - **Painéis dinâmicos** com produtos, preços, estoque e emojis personalizados
 - **Sistema de carrinho** com edição de quantidades e remoção de itens
 - **Pagamento via PIX** com QR Code gerado automaticamente
@@ -63,7 +83,7 @@ https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8
 - **Ban temporário** com desbanimento automático após X dias
 - **Log de membros** — entrada, saída, kick, ban
 - **Transcripts HTML** de tickets encerrados
-- **Sistema de verificação** com cargo de verificado
+- **Sistema de verificação** com cargo de verificado (captcha por DM)
 - **Modmail** — DM direto com a staff
 - **Contador de mensagens** com ranking e canais ignorados
 - **Sorteios (Giveaways)** com requisitos de cargo e mensagens
@@ -71,8 +91,9 @@ https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8
 ### 🎫 Tickets e Suporte
 - **Tickets de compra** — canal privado por pedido, com comprovante e entrega
 - **Tickets de suporte** — para dúvidas e problemas
+- **Tickets de recompensa** — para resgates de convite
 - **Categorias configuráveis** para cada tipo de ticket
-- **Transcript automático** ao fechar
+- **Transcript automático** ao fechar (com histórico completo salvo antes da exclusão)
 - **Sistema de avaliação** pós-atendimento
 
 ### 📊 Painel de Controle
@@ -80,29 +101,39 @@ https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8
 - **Gerenciamento de produtos** (adicionar, editar, excluir, ativar/desativar)
 - **Gerenciamento de painéis** (criar, editar, adicionar/remover opções)
 - **Estatísticas de vendas** por servidor
-- **Relatórios de faturamento**
-- **Backup e restauração** de dados por servidor
+- **Relatórios de faturamento** (CSV)
+- **Backup e restauração** de dados por servidor (restrito a administradores)
 
 ### 🔔 Automações
 - **Presença rotativa** do bot (mostra estatísticas embaixo do nome)
-- **Limpeza automática** de lojas inativas (com período de carência)
-- **Lembretes de licença** expirando
+- **Limpeza automática** de lojas inativas (com período de carência de 30 dias)
+- **Lembretes de licença** expirando (1, 3 e 7 dias antes)
 - **Backup automático** semanal
 - **Sincronização de painéis** ao editar produtos
+- **Verificação de integridade** do banco de dados a cada inicialização (com auto-reparo)
 
 ---
 
 ## 📋 Comandos Disponíveis
 
+### 💰 Planos da Loja
+
+| Comando | Descrição | Exemplo |
+|---|---|---|
+| `/loja vincular` | Ativa sua loja **de graça** (plano Gratuito, sem taxa) | `/loja vincular` |
+| `/loja plano` | Mostra seu plano, uso dos limites (3/5 produtos, 1/2 painéis) e dívidas antigas | `/loja plano` |
+| `/loja mudardeplano` | Compra/renova a licença Premium (R$ 0,50/dia, criação ilimitada) | `/loja mudardeplano` |
+
 ### 🛒 Loja e Compras
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
-| `/sacola ver` | Mostra seu carrinho de compras com subtotal, desconto e total | `/sacola ver` |
-| `/sacola historico` | Lista suas compras anteriores e status | `/sacola historico` |
-| `/sacola gasto` | Mostra quanto você já gastou no servidor | `/sacola gasto` |
-| `/loja top_gastadores` | Ranking dos maiores compradores do servidor | `/loja top_gastadores` |
-| `/loja meu_hub` | Hub pessoal com botões de acesso rápido | `/loja meu_hub` |
+| `/sacola ver` | Mostra seu carrinho com subtotal, desconto e total | `/sacola ver` |
+| `/minhascompras` | Lista suas compras anteriores e status | `/minhascompras` |
+| `/loja meugasto` | Mostra quanto você já gastou e o próximo cargo de recompensa | `/loja meugasto` |
+| `/loja top` | Ranking dos maiores compradores do servidor | `/loja top` |
+| `/minha_loja` | Hub pessoal com botões de acesso rápido (sacola, histórico, cupons, gastos) | `/minha_loja` |
+| `/loja robux calcular_robux` | Calculadora de conversão R$ ↔ Robux | `/loja robux calcular_robux` |
 
 **Fluxo de compra:**
 1. Abra o painel da loja no canal de compras
@@ -146,20 +177,24 @@ https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8
 2. Compartilhe com amigos → quando alguém entra pelo link, +1 no seu contador
 3. Ao bater a meta (ex: 5 convites), recebe uma DM avisando
 4. Use `/convite resgatar` → abre ticket com a staff + recebe o prêmio
-5. O convite antigo é deletado → você pode criar outro e continuar ganhando
+5. O convite antigo é invalidado → você pode criar outro e continuar ganhando
 
-### 🎫 Tickets
+### 🎉 Sorteios
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
-| `/ticket fechar` | Fecha o ticket atual (gera transcript) | `/ticket fechar` |
+| `/sorteio criar` | Cria um novo sorteio (vencedores: mínimo 1) | `/sorteio criar` |
+| `/sorteio gerenciar` | Gerencie sorteios ativos (encerrar, reroll, deletar) | `/sorteio gerenciar` |
+| `/sorteio minhasmensagens` | Vê seu saldo de mensagens para sorteios com requisito | `/sorteio minhasmensagens` |
 
-**Tickets são abertos automaticamente:**
-- Ao finalizar uma compra (ticket de compra)
-- Ao clicar em "Suporte" no painel (ticket de suporte)
-- Ao resgatar recompensa de convites (ticket de recompensa)
+**Recursos dos sorteios:**
+- Requisito de cargo para participar
+- Requisito de mensagens (ex: mínimo de 50 mensagens)
+- Múltiplos vencedores
+- Encerramento automático no horário
+- Reroll de vencedores (substitui a lista anterior)
 
-### 🧹 Moderação
+### 🧹 Moderação (Honeypot)
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
@@ -173,78 +208,64 @@ https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8
 2. Use `/honeypot ativar` nele
 3. O bot posta uma mensagem fixada avisando que é proibido enviar mensagens
 4. Se alguém enviar → mensagem é deletada + usuário banido por X dias
-5. Staff (admin+) é isento do ban automático
-6. Bans expiram automaticamente
+5. Toda a staff é isenta do ban automático (admin, dono, gerentes da loja e bots)
+6. Bans expiram automaticamente (desbanimento agendado)
 
-### 🎉 Sorteios (Giveaways)
-
-| Comando | Descrição | Exemplo |
-|---|---|---|
-| `/sorteio criar` | Cria um novo sorteio | `/sorteio criar prêmio:"100 Robux" dias:7 vencedores:1` |
-| `/sorteio gerenciar` | Gerencie sorteios ativos (encerrar, reroll, deletar) | `/sorteio gerenciar` |
-
-**Recursos dos sorteios:**
-- Requisito de cargo para participar
-- Requisito de mensagens (ex: mínimo de 50 mensagens)
-- Múltiplos vencedores
-- Encerramento automático no horário
-- Reroll de vencedores
-
-### 💬 Modmail
+### 💬 Modmail e Sugestões
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
-| `/modmail` | Abre uma conversa privada com a staff via DM | `/modmail` |
+| DM direto | Mande mensagem no privado do bot → abre ticket com a staff (dono de servidor/loja) | — |
+| `/sugestao` | Envia uma sugestão direto pro dono do bot | `/sugestao` |
 
-### 💡 Sugestões
-
-| Comando | Descrição | Exemplo |
-|---|---|---|
-| `/sugestao` | Envia uma sugestão direto pro dono do bot | `/sugestao mensagem:"Adicionar PayPal"` |
+> O modmail tem anti-spam: cooldown de 5 minutos entre tickets e fila de mensagens enquanto o canal é criado (nada se perde).
 
 ### ⚙️ Configuração do Servidor (Admin)
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
-| `/configurar pix` | Configura a chave PIX do servidor | `/configurar pix chave:"email@x.com" nome:"Loja" cidade:"SAO PAULO"` |
-| `/configurar canais` | Define canais de log, provas, carrinho, etc | `/configurar canais log:#logs prova:#provas` |
-| `/configurar cargo_verificado` | Define cargo de verificação | `/configurar cargo_verificado @Verificado` |
-| `/configurar cargo_suporte` | Adiciona cargo de suporte (vê tickets) | `/configurar cargo_suporte @Staff` |
-| `/configurar ignorar_canal` | Ignora canal no contador de mensagens | `/configurar ignorar_canal #bot-spam` |
+| `/configurar pix` | Configura a chave PIX do servidor (criptografada no banco) | `/configurar pix` |
+| `/configurar canais` | Define canais de log, provas, carrinho, etc | `/configurar canais` |
+| `/configurar verificacao definir` | Define cargo e canal de verificação (captcha) | `/configurar verificacao definir` |
+| `/configurar cargo_suporte` | Adiciona cargo de suporte (vê tickets) | `/configurar cargo_suporte` |
+| `/configurar recompensa` | Cargos automáticos por valor gasto | `/configurar recompensa` |
+| `/configurar campo_entrega` | Personaliza a pergunta de entrega do produto | `/configurar campo_entrega` |
+| `/configurar canal_ignorado` | Ignora canal no contador de mensagens | `/configurar canal_ignorar` |
 
 ### 🛍️ Gerenciamento de Produtos (Admin)
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
-| `/produto add` | Adiciona um produto | `/produto add nome:"Mush" tipo:MOEDA modelo:MILHAR preco:0.18 estoque:100000 emoji:🍄` |
-| `/produto editar` | Edita um produto existente | `/produto editar produto:"Mush" novo_preco:0.15` |
-| `/produto info` | Mostra info de um produto | `/produto info produto:"Mush"` |
-| `/produto listar` | Lista todos os produtos | `/produto listar` |
-| `/produto status` | Ativa/desativa um produto | `/produto status produto:"Mush"` |
-| `/produto excluir` | Exclui um produto | `/produto excluir produto:"Mush"` |
-| `/produto limiar` | Define estoque mínimo (avisa quando baixar) | `/produto limiar produto:"Mush" limiar:1000` |
+| `/produto adicionar` | Adiciona um produto ⚠️ *respeita o limite do plano* | `/produto adicionar` |
+| `/produto editar` | Edita um produto existente | `/produto editar` |
+| `/produto info` | Mostra info de um produto | `/produto info` |
+| `/produto listar` | Lista todos os produtos (com menu de ações) | `/produto listar` |
+| `/produto status` | Ativa/desativa um produto *(inativos não contam no limite!)* | `/produto status` |
+| `/produto excluir` | Exclui um produto | `/produto excluir` |
+| `/produto limiar_estoque` | Define estoque mínimo (avisa quando baixar) | `/produto limiar_estoque` |
 
 ### 🖼️ Gerenciamento de Painéis (Admin)
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
-| `/painel criar` | Cria um novo painel | `/painel criar titulo:"🛒 Loja" descricao:"Compre aqui!"` |
-| `/painel postar` | Posta o painel em um canal | `/painel postar painel:"loja" canal:#loja` |
-| `/painel add_opcao` | Adiciona produto ao painel | `/painel add_opcao painel:"loja" produto:"Mush" emoji:🍄` |
-| `/painel remover_opcao` | Remove produto do painel | `/painel remover_opcao painel:"loja" opcao:"..."` |
-| `/painel editar` | Edita o painel (banner, cor, etc) | `/painel editar painel:"loja" banner:"https://..."` |
-| `/painel sync` | Sincroniza o painel (atualiza preços) | `/painel sync painel:"loja"` |
-| `/painel excluir` | Exclui o painel | `/painel excluir painel:"loja"` |
+| `/painel criar` | Cria um novo painel ⚠️ *respeita o limite do plano* | `/painel criar` |
+| `/painel postar` | Posta o painel em um canal | `/painel postar` |
+| `/painel add_opcao` | Adiciona produto ao painel | `/painel add_opcao` |
+| `/painel remover_opcao` | Remove produto do painel | `/painel remover_opcao` |
+| `/painel editar` | Edita o painel (banner, cor, etc) | `/painel editar` |
+| `/painel editar_opcao` | Edita uma opção do painel | `/painel editar_opcao` |
+| `/painel sync` | Sincroniza o painel (atualiza preços/estoque) | `/painel sync` |
+| `/painel excluir` | Exclui o painel | `/painel excluir` |
 
 ### 🎟️ Cupons (Admin)
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
-| `/cupom admin_criar_publico` | Cria cupom público (código) | `/cupom admin_criar_publico codigo:"NATAL10" valor:10 usos:100 produto:"Mush" mostrar_painel:True` |
-| `/cupom admin_criar_tipo` | Cria cupom de sorteio | `/cupom admin_criar_tipo nome:"Cupom 5%" valor:5 peso:10` |
+| `/cupom admin_criar_publico` | Cria cupom público (código) | `/cupom admin_criar_publico` |
+| `/cupom admin_criar_tipo` | Cria cupom de sorteio | `/cupom admin_criar_tipo` |
 | `/cupom admin_listar` | Lista todos os cupons | `/cupom admin_listar` |
-| `/cupom admin_excluir` | Exclui um cupom | `/cupom admin_excluir cupom:"NATAL10"` |
-| `/cupom admin_remover_tipo` | Desativa um cupom de sorteio | `/cupom admin_remover_tipo cupom:"..."` |
+| `/cupom admin_excluir` | Exclui um cupom | `/cupom admin_excluir` |
+| `/cupom admin_remover_tipo` | Desativa um cupom de sorteio | `/cupom admin_remover_tipo` |
 
 **Parâmetros especiais ao criar cupom:**
 - `produto` (opcional) — vincula o cupom a um produto específico
@@ -256,28 +277,29 @@ https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
-| `/convite admin_configurar` | Configura o sistema de convites | `/convite admin_configurar threshold:5 recompensa:"50 Robux + VIP" cargo:@VIP categoria:#tickets` |
+| `/convite admin_configurar` | Configura o sistema de convites | `/convite admin_configurar` |
 | `/convite admin_desativar` | Desativa o sistema de convites | `/convite admin_desativar` |
 
-### 🧹 Moderação em Massa (Admin)
+### 🧹 Ações em Massa (apenas dono do bot)
 
 | Comando | Descrição | Exemplo |
 |---|---|---|
-| `/moderacao notificar_todos` | Envia DM para todos os membros | `/moderacao notificar_todos mensagem:"..."` |
-| `/moderacao adicionar_cargo` | Adiciona cargo a todos | `/moderacao adicionar_cargo cargo:@Membro` |
-| `/moderacao remover_cargo` | Remove cargo de todos | `/moderacao remover_cargo cargo:@Antigo` |
+| `/revalidar notificar_todos` | Envia DM para todos os membros (com confirmação) | `/revalidar notificar_todos` |
+| `/revalidar remover_cargo` | Remove um cargo de todos os membros (com confirmação) | `/revalidar remover_cargo` |
 
 ---
 
 ## ⚙️ Configuração Inicial (Após adicionar o bot)
 
-1. **Configure o PIX**: `/configurar pix` — defina a chave PIX do seu servidor
-2. **Configure os canais**: `/configurar canais` — log, provas, carrinho, etc
-3. **Adicione produtos**: `/produto add` — crie seus produtos
-4. **Crie um painel**: `/painel criar` → `/painel add_opcao` → `/painel postar`
-5. **Configure a categoria de tickets**: `/configurar canais`
-6. **(Opcional) Ative o honeypot**: crie um canal privado → `/honeypot ativar`
-7. **(Opcional) Configure convites**: `/convite admin_configurar`
+1. **Ative sua loja grátis**: `/loja vincular` — sem custo, sem comissão
+2. **Configure o PIX**: `/configurar pix` — defina a chave PIX do seu servidor
+3. **Configure os canais**: `/configurar canais` — log, provas, carrinho, etc
+4. **Adicione produtos**: `/produto adicionar` — até 5 no plano grátis
+5. **Crie um painel**: `/painel criar` → `/painel add_opcao` → `/painel postar`
+6. **Configure a categoria de tickets**: `/configurar canais`
+7. **(Opcional) Ative o honeypot**: crie um canal privado → `/honeypot ativar`
+8. **(Opcional) Configure convites**: `/convite admin_configurar`
+9. **Precisa de mais espaço?** `/loja mudardeplano` — licença Premium
 
 ---
 
@@ -285,22 +307,26 @@ https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8
 
 - **Criptografia** de dados sensíveis (chaves PIX) com Fernet (AES-128-CBC + HMAC-SHA256)
 - **Whitelists de colunas** contra SQL Injection nos UPDATEs dinâmicos
-- **Sistema anti-bypass**: lojas inativas têm dados preservados por 30 dias (evita kick+re-convite pra resetar período de teste)
-- **Validação atômica** de estoque (sem oversell)
-- **Notificação automática de erros** pro dono do bot via DM (com cooldown anti-spam)
-- **Honeypot** com isenção de staff (não bane admin/owner)
+- **Sistema anti-bypass**: lojas inativas têm dados preservados por 30 dias (evita kick+re-convite pra burlar carência)
+- **Validação atômica** de estoque (sem oversell, mesmo com cliques simultâneos)
+- **Proteção anti-corrida** em ações financeiras: confirmar pagamento, cancelar, aprovar licença e resgatar recompensas não sofrem duplicação com cliques duplos
+- **Notificação automática de erros** pro dono do bot via DM (com cooldown anti-spam, rate limit e **ocultação automática de tokens e chaves**)
+- **Backup/restauração restritos a administradores** — com validação de conteúdo (rejeita backups adulterados)
+- **Honeypot** com isenção completa da staff (não bane admin, dono nem gerentes)
 - **Bans temporários** com desbanimento automático
+- **Auto-reparo do banco**: integridade verificada a cada inicialização, com correção automática de referências quebradas e limpeza de registros órfãos
 
 ---
 
 ## 🛠️ Stack Técnico
 
 - **Linguagem**: Python 3.10+
-- **Framework**: discord.py
-- **Banco de dados**: SQLite (com migrações versionadas)
+- **Framework**: discord.py 2.x
+- **Banco de dados**: SQLite (migrações versionadas v1→v27, idempotentes, com auto-reparo)
 - **Criptografia**: cryptography (Fernet)
 - **QR Code PIX**: pixqrcodegen + qrcode
 - **Timezone**: pytz (America/Sao_Paulo)
+- **Qualidade**: 168 testes automatizados (8 suítes) rodando em ambiente isolado
 
 ---
 
@@ -309,33 +335,37 @@ https://discord.com/oauth2/authorize?client_id=1360681926318624908&permissions=8
 ```
 botvenda/
 ├── bot.py                  # Entry point, carrega cogs, handlers globais
-├── config.py               # Configurações (IDs, cores, taxas)
-├── crypto.py              # Criptografia Fernet
-├── database.py            # SQLite + migrações v1-v24 + CRUD
-├── ui_components.py       # Views, Modals, Selects (Discord UI)
+├── config.py               # Configurações (IDs, cores, limites do plano grátis)
+├── crypto.py               # Criptografia Fernet (chaves PIX)
+├── database.py             # SQLite + migrações v1-v27 (auto-reparo) + CRUD
+├── ui_components.py        # Views, Modals, Selects (Discord UI)
+├── CHANGELOG.md            # Histórico completo de versões
+├── DESENVOLVIMENTO.md      # Guia técnico (deploy, env, testes)
 ├── cogs/
-│   ├── events.py          # on_member_join/leave/guild_remove/join
-│   ├── store.py           # Loja, carrinho, tickets de compra, checkout PIX
-│   ├── admin.py           # Dashboard, produtos, painéis, backup
-│   ├── billing_cog.py    # Comissão, licenças, faturamento
-│   ├── coupon_cog.py     # Cupons (públicos + sorteio + vinculados a produto)
-│   ├── invite_cog.py     # Sistema de convites com recompensa (1-ciclo)
-│   ├── honeypot_cog.py   # Armadilha anti-hack com ban temporário
-│   ├── giveaway_cog.py    # Sorteios com requisitos
-│   ├── verification_cog.py # Verificação de membros
-│   ├── modmail_cog.py     # Modmail (DM com staff)
-│   ├── logger_cog.py      # Log de mensagens deletadas
-│   ├── mass_actions.py    # Ações em massa (DM, cargos)
+│   ├── events.py           # on_member_join/leave/guild_remove/join
+│   ├── store.py            # Loja, carrinho, tickets de compra, checkout PIX
+│   ├── admin.py            # Dashboard, produtos, painéis, backup
+│   ├── billing_cog.py      # Planos (freemium), licenças, faturamento legado
+│   ├── coupon_cog.py       # Cupons (públicos + sorteio + vinculados a produto)
+│   ├── invite_cog.py       # Sistema de convites com recompensa (1-ciclo)
+│   ├── honeypot_cog.py     # Armadilha anti-hack com ban temporário
+│   ├── giveaway_cog.py     # Sorteios com requisitos
+│   ├── verification_cog.py # Verificação de membros (captcha por DM)
+│   ├── modmail_cog.py      # Modmail (DM com staff)
+│   ├── logger_cog.py       # Log de mensagens deletadas
+│   ├── mass_actions.py     # Ações em massa (DM, cargos)
 │   ├── message_counter_cog.py # Contador de mensagens
-│   ├── permissions_cog.py  # Permissões e licenças
-│   ├── status_cog.py     # Presença rotativa + status global + limpeza
-│   ├── tasks.py           # Tasks agendadas (lembretes, backup)
-│   ├── utility_cog.py    # Sugestões
-│   └── test_bot_cog.py   # Autoteste
-└── utils/
-    ├── bot_utils.py        # CogBase com error handler + notificação DM
-    ├── error_notifier.py   # Notificação de erros pro dono (cooldown + rate limit)
-    └── transcript.py      # Geração de transcripts HTML
+│   ├── permissions_cog.py  # /botadmin: licenças, gerentes, bloqueios
+│   ├── status_cog.py       # Presença rotativa + status global + limpeza
+│   ├── tasks.py            # Tasks agendadas (lembretes, backup)
+│   ├── utility_cog.py      # Sugestões
+│   ├── config_cog.py       # /configurar (canais, pix, cargos)
+│   └── test_bot_cog.py     # Autoteste (apenas ambiente de testes)
+├── utils/
+│   ├── bot_utils.py        # Permissões UNIFICADAS + CogBase + helpers
+│   ├── error_notifier.py   # Notificação de erros (cooldown + rate limit + redação)
+│   └── transcript.py       # Geração de transcripts HTML
+└── tests/                  # 8 suítes de testes automatizados (168 verificações)
 ```
 
 ---
@@ -343,20 +373,21 @@ botvenda/
 ## 📈 Recursos Avançados
 
 - **Multi-servidor**: cada servidor tem configuração isolada
-- **Presença rotativa**: mostra servidores, membros, vendas totais, receita
+- **Modelo freemium**: plano grátis com limites de criação; licença Premium ilimitada — sem comissão sobre vendas
+- **Presença rotativa**: mostra servidores, membros, vendas totais, receita (com cache de performance)
 - **Backup automático** semanal (domingo às 03:00 UTC)
 - **Sincronização de painéis**: ao editar produto, painéis atualizam automaticamente
 - **Calculadora de compra**: R$ → Qtd / Qtd → R$ integrada ao fluxo
-- **Período de teste** de 24h pra novas lojas (comissão isenta)
-- **Sistema de comissão** automático com faturamento cíclico
-- **Anti-bypass de taxa**: dados financeiros preservados ao kick+re-convite
+- **Anti-bypass de taxa**: dados financeiros preservados ao kick+re-convite (carência de 30 dias)
+- **Integridade do banco**: verificação + auto-reparo na inicialização (FKs, órfãos, índices)
+- **Performance**: índices de consulta, cache de estatísticas, operações de banco fora da thread principal
 
 ---
 
 ## 🆘 Suporte
 
 - Use `/sugestao` pra enviar sugestões direto pro dono
-- Use `/modmail` pra falar com a staff do servidor
+- Mande DM pro bot pra abrir um modmail com a staff (dono de servidor/loja)
 - Abra um ticket de suporte pelo painel
 
 ---
@@ -364,3 +395,9 @@ botvenda/
 ## 📝 Licença
 
 Uso pessoal. Entre em contato com o dono do bot para uso comercial.
+
+---
+
+## 📜 Changelog
+
+Histórico completo de versões (v1.1 até a v5.0): veja [CHANGELOG.md](CHANGELOG.md).
