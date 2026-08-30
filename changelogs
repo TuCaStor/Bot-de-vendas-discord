@@ -1,5 +1,24 @@
 Changelog - TuCaNo Store
 
+v5.0.1 - Atualização de Correção de Bugs (30/08/2026)
+
+Corrigido o problema de geração de Pix que falhava com o erro "Falha ao
+descriptografar a chave PIX da guild" — o botão "Finalizar Compra" não
+respondia e o cliente ficava sem retorno nenhum. O que mudou:
+
+  - O bot agora testa TODAS as chaves Pix salvas na inicialização e avisa
+    exatamente quais servidores precisam reconfigurar, ANTES de uma venda
+    falhar (em vez de descobrir o problema durante a compra).
+  - O cliente recebe uma mensagem clara quando o Pix da loja está com
+    problema de configuração (antes o botão apenas não fazia nada).
+  - O cupom aplicado não é mais consumido se a geração do Pix falhar (antes
+    o cliente perdia o uso do cupom sem receber nada).
+  - Os logs mostram a causa real do problema de criptografia (chave trocada,
+    dado corrompido ou salvo em texto puro) junto com a solução, em vez de
+    uma mensagem vazia.
+  - A geração de faturas de comissão não é mais interrompida quando o Pix
+    do servidor está com problema.
+
 v5.0 - Refatoração Completa, Segurança e Freemium (23/08/2026)
 
 Esta é a maior atualização da história do bot. Todo o código (~17.000 linhas)
