@@ -1,5 +1,65 @@
 Changelog - TuCaNo Store
 
+v5.1.0 - Sistema de Trocas (MM), Recibos Anti-Fraude e Melhorias (05/09/2026)
+
+A grande novidade desta versão é o sistema completo de trocas com middleman,
+junto com correções importantes nos backups de imagens e melhorias no aviso
+geral. O que mudou:
+
+  NOVO: TROCAS COM MIDDLEMAN (TICKETS MM)
+  - /trocar enviar convida alguém para uma troca: o convite chega na DM da
+    pessoa e expira em 15 minutos (até 3 convites pendentes por usuário).
+  - Ao aceitar, um ticket privado é aberto automaticamente, com permissões
+    controladas para os dois lados da negociação.
+  - A troca só é finalizada quando os DOIS clicam em "✅ Concluir" (o dono do
+    bot pode forçar a conclusão). O cancelamento registra tudo nos logs e
+    limpa o canal em segundos.
+  - O /trocar existe somente no servidor principal do bot — nos outros
+    servidores o comando nem aparece.
+
+  NOVO: RECIBO ANTI-FRAUDE
+  - Ao concluir, os dois envolvidos recebem um recibo no mesmo estilo visual
+    dos transcripts de vendas, com data/hora de Brasília e histórico completo
+    (incluindo mensagens editadas e deletadas).
+  - As imagens do ticket são arquivadas DENTRO do recibo — a prova continua
+    valendo mesmo se os links do Discord expirarem.
+  - O arquivo do recibo é assinado digitalmente (qualquer edição, por menor
+    que seja, invalida a assinatura) e os dados internos vêm CRIPTOGRAFADOS
+    (padrão MMENC1): abrir o recibo no bloco de notas não revela mais IDs,
+    mensagens ou timestamps.
+  - /trocar verificar: anexe o recibo e o bot valida a assinatura e exibe os
+    dados conferidos, comparando com a assinatura publicada nos logs. Recibos
+    antigos continuam sendo aceitos normalmente.
+
+  AVISO GERAL MELHORADO (/avisar_geral)
+  - Novo parâmetro de escopo: 👑 Todos (padrão), 🏰 Só donos de servidores ou
+    🏪 Só logistas vinculados.
+  - O dono do bot agora TAMBÉM recebe o próprio aviso (antes era pulado da
+    lista).
+  - O relatório final (entregues x falhas) agora chega no canal onde o
+    comando foi usado — antes se perdia em transmissões longas.
+  - O log de execução mostra a composição exata dos destinatários (donos,
+    logistas, alvos únicos).
+
+  BACKUP DE IMAGENS E ARQUIVOS
+  - Corrigido o bug de imagens corrompidas/truncadas nos transcripts: o
+    download agora lê o arquivo até o fim, valida o tamanho e descarta
+    transferências incompletas.
+  - Novos destinos de arquivo: FreeImage.host, canal do Discord ou ambos
+    (IMAGE_ARCHIVE_TARGET), com canais separados para imagens e para outros
+    arquivos.
+  - Destino trocável em tempo real, sem reiniciar o bot, com opção de reset —
+    a preferência fica salva.
+  - Imagens de mensagens DELETADAS agora são arquivadas NA HORA da exclusão
+    (antes o link morria junto com a mensagem) — e registros antigos do banco
+    também passam a renderizar como imagem nos transcripts.
+
+  OUTROS
+  - Comandos exclusivos do servidor principal são sincronizados em separado —
+    entram em vigor imediatamente nesse servidor, sem tocar nos globais.
+  - Requisitos atualizados (Pillow <12) para compatibilidade com versões
+    recentes do Python.
+
 v5.0.1 - Atualização de Correção de Bugs (30/08/2026)
 
 Corrigido o problema de geração de Pix que falhava com o erro "Falha ao
