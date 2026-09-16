@@ -133,7 +133,7 @@ O fluxo de compra é o mesmo nas duas plataformas — tudo por menu e botões:
 
 ## 💻 Guia do Usuário de PC — Comandos com Exemplos
 
-No PC digitar é rápido — então aqui vai o **guia completo dos 94 comandos**, organizados por quem pode usar. Cada comando também mostra a tag na descrição, dentro do Discord.
+No PC digitar é rápido — então aqui vai o **guia completo dos 95 comandos**, organizados por quem pode usar. Cada comando também mostra a tag na descrição, dentro do Discord.
 
 **Legenda das tags:**
 
@@ -150,6 +150,7 @@ No PC digitar é rápido — então aqui vai o **guia completo dos 94 comandos**
 
 | Comando | O que faz | Exemplo de uso |
 |---|---|---|
+| `/ajuda` | Central de Ajuda interativa: botões por categoria com todos os comandos e tags | `/ajuda` → toca em "🛒 Comprar" |
 | `/loja minha_loja` | Hub pessoal com botões: sacola, histórico, gasto e cupons | `/loja minha_loja` → toca em "Ver Sacola" |
 | `/sacola ver` | Mostra seu carrinho com subtotal, desconto e total | `/sacola ver` → ajusta quantidade e finaliza |
 | `/minhascompras` | Lista suas últimas 10 compras nesta loja com status | `/minhascompras` |
@@ -201,7 +202,7 @@ No PC digitar é rápido — então aqui vai o **guia completo dos 94 comandos**
 | `/painel editar` | Edita texto, imagens e cor do painel | troca o banner de temporada |
 | `/painel editar_opcao` | Edita um item do painel | `/painel editar_opcao` |
 | `/painel postar` | Publica (ou move) o painel num canal — já com produtos e estoque | posta no `#loja` |
-| `/painel sync` | Re-sincroniza o painel com o banco | após edição em massa de preços |
+| `/painel atualizar` | Atualiza a mensagem do painel com o banco | após edição em massa de preços |
 | `/painel excluir` | Exclui o painel | `/painel excluir` |
 
 **Gestão da loja e honeypot:**
@@ -352,5 +353,6 @@ No PC digitar é rápido — então aqui vai o **guia completo dos 94 comandos**
 - **Celular ou PC**: mande uma **DM no bot** para abrir um modmail com a staff (dono de servidor/loja)
 - Abra um **ticket de suporte** pelo painel
 - Use `/sugestao` para enviar sugestões direto pro dono do bot
+- Dúvidas sobre permissões? Veja [`COMANDOS_PERMISSOES.md`](COMANDOS_PERMISSOES.md) — ou digite o comando no Discord e olhe a tag na descrição
 
 ---
