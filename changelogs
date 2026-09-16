@@ -1,5 +1,44 @@
 Changelog - Moshiini_ automações
 
+v5.1.4 - Central de Ajuda (/ajuda) e /painel atualizar (17/09/2026)
+
+Esta atualização cria um comando de ajuda interativo com botões e
+troca o nome técnico do /painel sync por um nome mais claro. O que
+mudou:
+
+  NOVO: CENTRAL DE AJUDA — COMANDO /ajuda
+  - O bot agora tem 95 comandos: o /ajuda abre, em mensagem privada
+    (só você vê), a Central de Ajuda com botões de navegação:
+      🛒 Comprar · 👑 Gestão · ⚙️ Configurar · 🎟️ Cupons
+      🎁 Convites · 🛡️ Segurança · 🤖 Bot · 🏠 Início
+  - Cada categoria lista os comandos daquela área com a tag de quem
+    pode usá-los ([TODOS], [GERENTE+] e afins) — a mesma legenda do
+    COMANDOS_PERMISSOES.md, agora direto no Discord, sem precisar
+    abrir documento nenhum.
+  - A página inicial traz o passo a passo mínimo para o dono do
+    servidor (vincular a loja → configurar canais e PIX → produto →
+    painel → dashboard) e atalhos para quem acabou de comprar.
+  - A ajuda é exclusiva de quem abriu o comando (outra pessoa não
+    troca a sua página) e expira em 3 minutos: os botões desabilitam
+    e avisam — basta usar /ajuda de novo para reabrir.
+
+  RENOMEADO: /painel sync → /painel atualizar
+  - O subcomando que reenvia a mensagem do painel com os dados atuais
+    do banco agora se chama /painel atualizar — sem jargão de
+    programador ("sincronizar").
+  - O funcionamento não mudou: atualiza a exibição visual do painel
+    (produtos, preços, estoque) sem precisar postar o painel de novo.
+  - Mensagens do bot que citavam o comando antigo foram ajustadas
+    (diagnóstico de painel sem produtos e mensagem pós-restauração).
+
+  ATUALIZADO: COMANDOS_PERMISSOES.md
+  - /ajuda entra na tabela [TODOS] (19 → 20 comandos) e o total do
+    documento sobe para 95 comandos.
+  - A linha do /painel sync virou /painel atualizar.
+
+  Para o /ajuda e o novo nome aparecerem no Discord, reinicie o bot
+  com SYNC_COMMANDS=1 no .env (depois pode voltar para 0).
+
 v5.1.3 - Tags de Permissão nos Comandos e /loja vincular (16/09/2026)
 
 Esta atualização deixa visível quem pode usar cada comando do bot e
