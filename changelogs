@@ -1,4 +1,47 @@
-Changelog - TuCaNo Store
+Changelog - Moshiini_ automações
+
+v5.1.3 - Tags de Permissão nos Comandos e /loja vincular (16/09/2026)
+
+Esta atualização deixa visível quem pode usar cada comando do bot e
+corrige a mensagem genérica de "sem permissão" do /loja vincular. O que
+mudou:
+
+  NOVO: TAG DE PERMISSÃO EM TODOS OS 94 COMANDOS
+  - A descrição de cada comando (visível ao digitar o comando no
+    Discord) agora traz uma tag dizendo quem pode usá-lo. Legenda:
+      [DONO DO BOT]    somente o dono do bot.
+      [DONO DO SERV]   somente o dono do servidor onde o comando foi
+                       digitado.
+      [ADMINS]         o dono do servidor ou membros com cargo de
+                       Administrador.
+      [GERENTE+]       dono, administradores ou gerentes da loja
+                       (nível 1 ou acima).
+      [GER. SERVIDOR]  quem possui a permissão "Gerenciar Servidor".
+      [TODOS]          qualquer membro do servidor.
+  - Grupos de comandos (/loja, /sorteio, /cupom, /convite e outros 14)
+    também foram etiquetados; grupos com subcomandos de níveis
+    diferentes recebem tag neutra, pois a restrição real fica em cada
+    subcomando.
+  - Distribuição atual dos 94 comandos: 23 [DONO DO BOT], 23 [ADMINS],
+    24 [GERENTE+], 19 [TODOS], 3 [DONO DO SERV] e 2 [GER. SERVIDOR].
+  - A legenda completa e a tabela com todos os comandos estão no arquivo
+    COMANDOS_PERMISSOES.md, dentro da pasta do bot.
+  - Para as tags novas aparecerem no Discord, reinicie o bot com
+    SYNC_COMMANDS=1 no .env (a sincronização de comandos só roda quando
+    solicitada).
+
+  CORRIGIDO: /LOJA VINCULAR AGORA EXPLICA QUEM PODE USAR
+  - Quando alguém que não é o dono do servidor tenta usar o comando, a
+    negação agora é explícita: "❌ Somente o dono do servidor pode usar
+    este comando — cargos de administrador ou gerente não são
+    suficientes." (antes aparecia apenas um "sem permissão" genérico,
+    sem explicar o motivo).
+  - A descrição do próprio comando também avisa: "Somente o dono do
+    servidor pode usar."
+  - A melhoria vale em todos os caminhos de negação do bot (comandos
+    slash, botões e painéis): o motivo real da negação é mostrado
+    sempre que existir, e a mensagem genérica fica apenas como último
+    recurso.
 
 v5.1.2 - Correções básicas
 
