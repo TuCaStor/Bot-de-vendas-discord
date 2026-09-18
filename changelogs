@@ -1,5 +1,10 @@
 Changelog - Moshiini_ automações
 
+v5.1.5 - Correções de erros
+
+No comando ajuda havia uma corrida nos botões que faziam o bot gritar erros no console...
+Fora isso mesma coisa no minha loja, então tudo arrumado
+
 v5.1.4 - Central de Ajuda (/ajuda) e /painel atualizar (17/09/2026)
 
 Esta atualização cria um comando de ajuda interativo com botões e
